@@ -6,7 +6,7 @@ const router = express.Router();
 
 router
 .get("/", (req, res)=>{
-    res.render("paymentDemo")
+    res.render("itemsCart")
 })
 .post("/",[parseUrl, parseJson], checkoutControllers.payNow);
 

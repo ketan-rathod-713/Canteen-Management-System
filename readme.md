@@ -11,8 +11,8 @@ Whole processes can be divided into following sub tasks <br>
 ### Run Server On Local Environment
 #### 1. download/clone this project 
 #### 2. npm install ( in directory ..../server/)
-#### 3. npm run dev ( it will start development server on port 3000 ), Now explore all the routes.
-
+#### 3. Start mongoDB local server using command "mongod"
+#### 4. npm run dev ( it will start development server on port 3000 ), Now explore all the routes.
 ### Items
 
 - /items GET : To retrieve all the Object of dates with array of items embedded inside it. <br>
