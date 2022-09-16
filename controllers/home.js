@@ -6,7 +6,7 @@ module.exports = {
     
     // HOME PAGE
     homePageGetReq : (req, res)=>{
-        res.send("welecome to my canteen")
+        res.render("home")
     },
 
     // SIGNUP PAGE

@@ -1,11 +1,9 @@
 module.exports = {
   dev : {
-  url: "mongodb://localhost:27017/", // for local development
-  database: "CanteenItems",
+  database: "mongodb://localhost:27017/CanteenItems", // for local development
   },
   
   prod: {
-    url: "", // for production development
-    database: "CanteenItems",
+    database: process.env.DATABASE,
     },
 };

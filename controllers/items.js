@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const crypto = require("crypto");
-mongoose.connect("mongodb://localhost:27017/canteenDemo");
 
 const dbSchema = require('../config/dbSchema')
 const Item = dbSchema.Item;

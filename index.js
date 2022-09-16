@@ -8,7 +8,10 @@ const session = require('express-session');
 var passport = require('passport');
 const MongoStore = require('connect-mongo'); // Package documentation - https://www.npmjs.com/package/connect-mongo
 
-mongoose.connect("mongodb://localhost:27017/canteenDemo");
+const db = require("../server/config/db").dev
+// const db = require("../server/config/db").prod
+
+mongoose.connect(db.database);
 
 const app = express();
 
