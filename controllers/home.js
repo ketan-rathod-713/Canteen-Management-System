@@ -17,28 +17,39 @@ module.exports = {
     // GET SIGNUP CREDENTIALS (USERNAME AND PASSWORD)
     signUpPostReq : (req, res, next) => {
         const saltHash = genPassword(req.body.password) // see how to use the custom names for this
-    
+        console.log(req.body)
+        console.log(req.body.username)
         const salt = saltHash.salt
         const hash = saltHash.hash
-    
+        const firstname = req.body.firstname
+        const lastname = req.body.lastname
+        const phone = req.body.phone
+
         const newUser = new User({
             _id: req.body.username,
             hash: hash,
             salt: salt,
-            admin: false // Right now manually check 
+            admin: false, // Right now manually check 
+            firstname: firstname,
+            lastname: lastname,
+            phone: phone
         })
-    
         // check if user exists or not , there may be chances that false user so OTP or like that stuff later
         User.find({_id: req.body.username}, (err, doc)=>{
-            if(doc == null){
+            console.log(doc +" doc")
+            if(doc == null || doc.length === 0){
                 newUser.save()
                 .then((user)=>{
                 console.log(user)
+                res.redirect("/") // go to signIn page 
                 })
+            } else {
+                // res.send(doc)
+                res.send("username already exists")
             }
         })
 
-        res.redirect("/") // go to signIn page 
+        
     },
     
     // LOGIN PAGE
@@ -55,5 +66,27 @@ module.exports = {
     logOut : (req, res, next) => {
         req.logout(); // USING PASSPORT
         res.redirect('/');
+    },
+
+    // GET PROFILE
+    getProfile : (req, res)=>{
+        // get other informations from database
+        // Only come to this route if authenticated
+        const username = req.user._id;
+        console.log(username)
+
+        User.find({_id : username },(err, user)=>{
+            // i think see it in req.user yes
+            console.log(user)
+            // don't send all information including salt
+            if(user)
+            res.render("profile", {user: user[0]})
+            
+        })
+    },
+
+    // POST REQ. UPDATE PROFILE INFORMATION ( CRUCIAL WHEN UPDATING USERNAME OR PASSWORD )
+    updateProfile : (req, res)=>{
+
     }
 }

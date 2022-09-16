@@ -34,6 +34,9 @@ const UserSchema = new mongoose.Schema({
   hash: String,
   salt: String,
   admin: Boolean,
+  firstname: String,
+  lastname: String,
+  phone: String,
 });
 
 const User = new mongoose.model('User', UserSchema);

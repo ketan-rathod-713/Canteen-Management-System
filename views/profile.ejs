@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -14,40 +13,34 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
-        <title> Sign up</title>
+        <title>Update profile | My Canteen</title>
         <link rel="icon" href="logoForMeal.png">
         <link rel="stylesheet" href="profile.css">
     </head>
 <body class="d-flex flex-column h-100">
     <div class="container form-signin mt-5 localbyme">
         
-        <form method="POST" action="/signup" class="form-floating">
-            <h2 class="mt-4 mb-4 fw-normal text-bold text-center"><i class="bi bi-pencil-square me-2"></i>SiGN UP</h2>
+        <form method="POST" action="cust_update_profile.php" class="form-floating">
+            <h2 class="mt-4 mb-3 fw-normal text-bold text-center"><i class="bi bi-pencil-square me-2"></i>My Profile</h2>
             <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="firstname" placeholder="First Name" name="firstname" value="yash" required="">
+                <input type="text" class="form-control" id="firstname" placeholder="First Name" name="firstname" value="<%=user.firstname%>" required="">
                 <label for="firstname">First Name</label>
             </div>
             <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="lastName" placeholder="Last Name" value="patel" name="lastname" required="">
+                <input type="text" class="form-control" id="lastname" placeholder="Last Name" value="<%=user.lastname%>" name="lastname" required="">
                 <label for="lastname">Last Name</label>
             </div>
-
             <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="email" placeholder="E-mail" name="username" value="" required="">
-                <label for="email">E-mail ( will be used as username )</label>
+                <input type="email" class="form-control" id="email" placeholder="E-mail" name="email" value="<%=user._id%>" required="">
+                <label for="email">E-mail</label>
             </div>
-
             <div class="form-floating mb-3">
-              <input type="phone" class="form-control" id="phone" placeholder="Phone" name="phone" value="" required="">
-              <label for="phone">Phone No.</label>
-          </div>
-
-            <div class="form-floating mb-3">
-              <input type="password" class="form-control" id="password" placeholder="Password" name="password" value="" required="">
-              <label for="password"> Password</label>
-          </div>
+                <input type="phone" class="form-control" id="phone" placeholder="Phone" name="phone" value="<%=user.phone%>" required="">
+                <label for="phone">Phone No.</label>
+            </div>
+        
             
-            <button class="w-100 btn btn-success mb-3" type="submit"> SIGN UP</button>
+            <button class="w-100 btn btn-success mb-3" name="upd_confirm" type="submit">Update Profile</button>
         </form>
     </div>
 </body>

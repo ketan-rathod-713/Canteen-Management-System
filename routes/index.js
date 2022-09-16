@@ -32,6 +32,7 @@ router
       res.redirect('/');
     });
   })
+.get("/profile/:username",isAuth,  homeControllers.getProfile)
 .use("/items", isAuth ,itemRoutes)
 .use("/checkout", isAuth ,checkoutRoutes)
 
