@@ -60,3 +60,5 @@ checkout -> make order with id -> payment with that orderId -> check payment sta
 
 /orders/paynow POST  Make order here it self and redirect to do further transaction 
 /orders/orderId GET show the whole order information
+
+admin is not bothered about unsuccessfull transactions but user does so store info about it at user side.

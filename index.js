@@ -1,16 +1,19 @@
 const express = require("express");
-const app = express();
-const itemRoutes = require("../server/routes/item");
-const checkoutRoutes = require("../server/routes/checkout");
 const ejs = require("ejs");
 const port = process.env.PORT || 3000;
+const indexRoutes = require("../server/routes/index")
+const morgan = require("morgan");
 
+const app = express();
+
+
+// GENERAL MIDDLEWARES
 app.use(express.static('public'))
 app.set("view engine","ejs");
 app.use(express.json());
+require('dotenv').config();
 
-app.use("/items", itemRoutes);
-app.use("/checkout", checkoutRoutes);
+app.use("/" ,indexRoutes);
 
 app.listen(port, () => {
   console.log(`server is listening on port ${port}`);

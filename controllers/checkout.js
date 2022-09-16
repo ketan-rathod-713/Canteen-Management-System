@@ -13,54 +13,43 @@ module.exports = {
     payNow :  (req, res) => {
         // Route for making payment
         // need to add dates for the items before placing order so that user can't order items that doesn't exist now
-        const allItems = [{      
-            "itemId": "44f93222e56d",
-            "type": "Lunch",
-            "name": "Dinner Full Dish",
-            "menu": [
-            "Roti",
-            "Sabji",
-            "Sabji",
-            "Chas",
-            "Salad"
-            ],
-            "price": 50,
-            "available": true,
-            "lastUpdated": "2022-09-13T13:51:46.445Z"
-                    },
-        {
-            "itemId": "cc3ad60ddc15",
-            "type": "Dinner",
-            "name": "Dinner Half Dish",
-            "menu": [
-            "Roti",
-            "Sabji"
-            ],
-            "price": 30,
-            "available": true,
-            "lastUpdated": "2022-09-13T13:52:35.588Z"
-            },
-    ];
+    const date = "2022-11-10"; // date for which we are doing payment to just confirm, or for preorder we need this 
+    const allItems = [{itemId: "abcd", itemQt: 1},{itemId: "abcdefg", itemQt: 3},] // map all items with original ones
     const totalAmount = 1; //default
+    const userName = "Aman";
+    const userPhone = "9725488060"
+    const userEmail = "ketanrtd1@gmail.com"
 
-        const orderId = crypto.randomBytes(12).toString('hex');
-        const currTime = new Date();
-        const orderDetails = {
-            orderId : orderId,
+    const orderId = crypto.randomBytes(12).toString('hex');
+    const currTime = new Date();
+    
+    const orderDetails = {
+            _id : orderId,
+            userName: userName,
+            userId: "dsfiwefewof", // need it to hover for database 
+            paytmUserName: "@ketanrtd713",
+            userEmail: userEmail,
+            userPhone: userPhone,
             totalAmount : totalAmount,
             allItems: allItems,
-            paymentStatus: "pending",
+            orderStatus: "pending",
             paymentStatus: "pending",
             timeWhenOrderPlaced: currTime
         }
 
+        const order = new Order(orderDetails);
+
+        order.save();
+
+        // ALSO SAVE IT IN USER's DATABASE
+
         console.log(orderDetails)
 
         var paymentDetails = {
-          amount: req.body.amount,
-          customerId: "@" + req.body.name,
-          customerEmail: req.body.email,
-          customerPhone: req.body.phone,
+          amount: orderDetails.totalAmount.toString(), // total amount is number
+          customerId: orderDetails.paytmUserName,
+          customerEmail: orderDetails.userEmail,
+          customerPhone: orderDetails.userPhone,
         };
         if (
           !paymentDetails.amount ||
@@ -75,10 +64,10 @@ module.exports = {
           params["WEBSITE"] = config.PaytmConfig.website;
           params["CHANNEL_ID"] = "WEB";
           params["INDUSTRY_TYPE_ID"] = "Retail";
-          params["ORDER_ID"] = "TEST_" + new Date().getTime();  // we have made this ?? how can we use it.
+          params["ORDER_ID"] = orderDetails._id;  // we have made this ?? how can we use it.
           params["CUST_ID"] = paymentDetails.customerId;
           params["TXN_AMOUNT"] = paymentDetails.amount; // we are passing this
-          params["CALLBACK_URL"] = "http://localhost:4000/callback"; // callback to call when payment done or success so need to add entries in database when such event occurs
+          params["CALLBACK_URL"] = `http://localhost:3000/checkout/order/${orderDetails._id}`; // callback to call when payment done or success so need to add entries in database when such event occurs
           params["EMAIL"] = paymentDetails.customerEmail;
           params["MOBILE_NO"] = paymentDetails.customerPhone; 
       
@@ -113,4 +102,100 @@ module.exports = {
         }
     },
 
+paymentCallback : (req, res) => {
+  // Route for verifiying payment, it is like a webhook and called by paytm ig, but how paytm can call my localhost ??
+
+  var body = "";
+
+  req.on("data", function (data) {
+    body += data;
+  });
+
+  req.on("end", function () {
+    var html = "";
+    var post_data = qs.parse(body);
+
+    // received params in callback
+    console.log("Callback Response: ", post_data, "\n");
+
+    // verify the checksum
+    var checksumhash = post_data.CHECKSUMHASH;
+    // delete post_data.CHECKSUMHASH;
+    var result = checksum_lib.verifychecksum(
+      post_data,
+      config.PaytmConfig.key,
+      checksumhash
+    );
+    console.log("Checksum Result => ", result, "\n");
+
+    // Send Server-to-Server request to verify Order Status
+    // in order id add some employee information and then see
+    var params = { MID: config.PaytmConfig.mid, ORDERID: post_data.ORDERID };
+
+    // TODO : here check the details informations and update the orderId with respective values in background and redirect another with different route
+    
+      
+    const orderDetails = {
+      _id : post_data.ORDERID,
+      // userName: userName,
+      // paytmUserName: "@ketanrtd713",
+      // userEmail: userEmail,
+      // userPhone: userPhone,
+      // totalAmount : totalAmount,
+      // allItems: allItems,
+      orderStatus: post_data.STATUS ? "Ongoing" : "Failed",
+      paymentStatus: post_data.STATUS,
+      timeWhenOrderPlaced: new Date()
+  }
+
+  
+
+  // order.save();
+
+
+    checksum_lib.genchecksum(
+      params,
+      config.PaytmConfig.key,
+      function (err, checksum) {
+        params.CHECKSUMHASH = checksum;
+        post_data = "JsonData=" + JSON.stringify(params);
+
+        var options = {
+          hostname: "securegw-stage.paytm.in", // for staging
+          // hostname: 'securegw.paytm.in', // for production
+          port: 443,
+          path: "/merchant-status/getTxnStatus",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Length": post_data.length,
+          },
+        };
+
+        // Set up the request
+        var response = "";
+        var post_req = https.request(options, function (post_res) {
+          post_res.on("data", function (chunk) {
+            response += chunk;
+          });
+
+          post_res.on("end", function () {
+            console.log("S2S Response: ", response, "\n");
+
+            var _result = JSON.parse(response);
+            if (_result.STATUS == "TXN_SUCCESS") {
+              res.send("payment sucess");
+            } else {
+              res.send(orderDetails);
+            }
+          });
+        });
+
+        // post the data
+        post_req.write(post_data);
+        post_req.end();
+      }
+    );
+  });
+}
     }

@@ -16,9 +16,13 @@ module.exports = {
 
   
   getItemsOnDate: (req, res)=>{
+    let items = []
     Item.find({_id: req.params.date}, function (err, docs) {
-      res.send(docs);
+      // res.send(docs);
+      items = docs;
     });
+    res.render("itemsCart",{items:items})
+    
   },
 
   // ADD, REMOVE, UPDATE item
