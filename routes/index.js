@@ -9,6 +9,7 @@ const parseJson = express.json({ extended: false });
 // ROUTES
 const itemRoutes = require("./item")
 const checkoutRoutes = require("./checkout")
+const adminRoutes = require("./admin")
 
 // CONTROLLERS
 const homeControllers = require("../controllers/home");
@@ -35,6 +36,6 @@ router
 .get("/profile/:username",isAuth,  homeControllers.getProfile)
 .use("/items", isAuth ,itemRoutes)
 .use("/checkout", isAuth ,checkoutRoutes)
-
+.use("/admin", adminRoutes)
 
 module.exports = router
