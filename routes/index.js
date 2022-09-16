@@ -12,6 +12,7 @@ const checkoutRoutes = require("./checkout")
 // CONTROLLERS
 const homeControllers = require("../controllers/home");
 const home = require("../controllers/home");
+const { isAuth } = require("../middlewares/authMiddleware");
 
 const router = express.Router();
 
@@ -21,9 +22,9 @@ router
 .get("/signup", homeControllers.signUpGetReq )
 .post("/signup",[parseUrl, parseJson] , homeControllers.signUpPostReq)
 .get("/login",homeControllers.loginGetReq)
-.post('/login',passport.authenticate('local',{failureRedirect: '/login-failure',successRedirect: "/login-success"}))
-.use("/items",itemRoutes)
-.use("/checkout",checkoutRoutes)
+.post('/login',[parseUrl, parseJson],passport.authenticate('local',{failureRedirect: '/login',successRedirect: "/checkout"}))
+.use("/items", isAuth ,itemRoutes)
+.use("/checkout", isAuth ,checkoutRoutes)
 
 
 module.exports = router

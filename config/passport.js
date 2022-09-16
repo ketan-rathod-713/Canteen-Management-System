@@ -3,16 +3,9 @@ const validPassword = require('./passwordUtils').validPassword;
 const LocalStrategy = require('passport-local').Strategy;
 const User = require("./dbSchema").User;
 
-// TODO: passport.use();
-// First of all for passport local strategy there is standard that the passport has set so follow it.
-// Verify call back
-
-// We will be using LocalStratagy and it requires verify callback and it also requires {username, password, done function}
-// this values will be populated by the passport.js
-// if you do not name your fields as username and password then passport will not be able to know ...
-// what we are doing in verify callback => Our own implementation of passport.js
-// It doesn't matter what database you use 
-// and how you choose verify credentiales but pass values what passport wants
+// We will be using LocalStratagy and it requires verify callback
+// username, password GIVEN FROM FORM (SAME NAME) and done is the callback function that it wants
+// This values populated by passport js
 
 // VERIFY CALLBACK TO GIVE TO PASSPORT
 const verifyCallBack = (username, password, done) =>{
