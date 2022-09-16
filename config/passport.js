@@ -10,7 +10,7 @@ const User = require("./dbSchema").User;
 // VERIFY CALLBACK TO GIVE TO PASSPORT
 const verifyCallBack = (username, password, done) =>{
 
-    User.findOne({username: username})
+    User.findOne({_id: username})
         .then((user)=>{
 
             if(!user){ return done(null, false)}

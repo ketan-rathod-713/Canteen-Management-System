@@ -1,38 +1,44 @@
 const mongoose = require("mongoose")
 
+// SCHEMAS ( NEED TO REFACTOR TO REQUIRED SOME OF THEM )
+
+// ITEM ( FOR FOOD ITEMS )
 const itemSchema = new mongoose.Schema({
     _id: Date,
     items: {
-      type: Array, // TO DO : DEFINE PROPER SCHEMA HERE
+      type: Array, 
     },
   });
   
 const Item = mongoose.model("Item", itemSchema);
   
 
-// add validations like required and all that to have the consistency in documents
+// ORDER ( FOR ORDER OF ARRAY OF ITEMS )
 const orderSchema = new mongoose.Schema({
-  _id: String, // order Id
+  _id: String, // ORDER ID
   userName: String,
   userEmail: String,
   userPhone: String,
-  allItems: Array, // an array of items
+  allItems: Array, // ARRAY OF ITEMS (FIX)
   totalAmount: Number,
-  orderStatus: String, // can i have enum data type here or like that to select
+  orderStatus: String, // CAN I HAVE ENUM HERE 
   paymentStatus: String,
   timeWhenOrderPlaced: Date
 })
 
 const Order =  mongoose.model("Order", orderSchema);
 
+// USER ( CUSTOMER WHO GOING TO BUY ITEMS )
 const UserSchema = new mongoose.Schema({
-  username: String,
+  _id: String, // IT IS USERNAME
   hash: String,
   salt: String,
-  admin: Boolean
+  admin: Boolean,
 });
 
 const User = new mongoose.model('User', UserSchema);
+
+// ____________________________________________________________________________________________________________________________________
 
 module.exports = {
     Item: Item,

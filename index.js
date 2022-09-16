@@ -1,12 +1,10 @@
 const express = require("express");
 const ejs = require("ejs");
-const port = process.env.PORT || 3000;
 const indexRoutes = require("../server/routes/index")
 const morgan = require("morgan");
 
 const session = require('express-session');
 var passport = require('passport');
-var crypto = require('crypto');
 const MongoStore = require('connect-mongo'); // Package documentation - https://www.npmjs.com/package/connect-mongo
 
 const app = express();
@@ -17,11 +15,11 @@ app.set("view engine","ejs");
 app.use(express.json());
 require('dotenv').config();
 
+// AUTHENTICATION STUFF : 
 // MAKE SESSION, SO THAT PASSPORT WORK LATER
 const sessionStore = MongoStore.create({
   mongoUrl: process.env.DB_STRING
 })
-
 
 app.use(session({
   secret: process.env.SECRET,
@@ -45,13 +43,14 @@ app.use((req, res, next)=>{
     next()
 })
 
+// ROUTES
 app.use("/" ,indexRoutes);
 
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`server is listening on port ${port}`);
 });
 
-
- // to dos with express session middleware , request session persisted in database in sessions collection
+// to dos with express session middleware , request session persisted in database in sessions collection
 // They both work together and what they are going to do 
 // https://stackoverflow.com/questions/22052258/what-does-passport-session-middleware-do/28994045#28994045
