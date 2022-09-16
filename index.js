@@ -1,6 +1,6 @@
 const express = require("express");
 const ejs = require("ejs");
-const indexRoutes = require("../server/routes/index")
+const indexRoutes = require("./routes/index")
 const morgan = require("morgan");
 const mongoose = require("mongoose")
 
@@ -8,7 +8,7 @@ const session = require('express-session');
 var passport = require('passport');
 const MongoStore = require('connect-mongo'); // Package documentation - https://www.npmjs.com/package/connect-mongo
 
-const db = require("../server/config/db").dev
+const db = require("./config/db").dev
 // const db = require("../server/config/db").prod
 
 mongoose.connect(db.database);
