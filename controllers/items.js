@@ -8,19 +8,29 @@ module.exports = {
   // GET all the items sorted by date
   // TODO : Sorting with date
   getItems: (req, res) => {
-    Item.find({}, function (err, docs) {
-      res.send(docs);
+
+    var dateObj = new Date();
+    var month = dateObj.getUTCMonth() + 1; //months from 1-12
+    var day = dateObj.getUTCDate();
+    var year = dateObj.getUTCFullYear();
+    let currDate = year + "-" + month + "-" + day; // today's date automatically from server
+
+    console.log(currDate)
+
+    Item.find({_id: currDate}, function (err, docs) {
+      // res.send(docs);
+      const items = docs[0].items;
+      console.log(items)
+      res.render("itemsCart", {items: items})
     });
   },
 
   
   getItemsOnDate: (req, res)=>{
-    let items = []
     Item.find({_id: req.params.date}, function (err, docs) {
       // res.send(docs);
-      items = docs;
+      res.render("itemsCart")
     });
-    res.render("itemsCart",{items:items})
     
   },
 
