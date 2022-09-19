@@ -109,6 +109,7 @@
             <div class="right_side p-3 shadow bg-white">
               <h2 class=" mb-5">The Total Amount Of</h2>
               <!-- things will append in below div-->
+              <form action="/checkout" method="post">
               <div id="appendHere">
 
               </div>
@@ -125,8 +126,9 @@
               </div>
               <!-- ckeckout button -->
               <a href="#">
-                <button class="btn btn-primary text-uppercase ">Checkout</button>
+                <button value=`${arr}` class="btn btn-primary text-uppercase ">Checkout</button>
               </a>
+            </form>
             </div>
           </div>
         </div>

@@ -20,7 +20,7 @@
 <body class="d-flex flex-column h-100">
     <div class="container form-signin mt-5 localbyme">
         
-        <form method="POST" action="cust_update_profile.php" class="form-floating">
+        <form method="POST" action="/profile/<%=user._id%>" class="form-floating">
             <h2 class="mt-4 mb-3 fw-normal text-bold text-center"><i class="bi bi-pencil-square me-2"></i>My Profile</h2>
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="firstname" placeholder="First Name" name="firstname" value="<%=user.firstname%>" required="">
@@ -31,7 +31,7 @@
                 <label for="lastname">Last Name</label>
             </div>
             <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="email" placeholder="E-mail" name="email" value="<%=user._id%>" required="">
+                <input disabled type="email" class="form-control" id="email" placeholder="E-mail" name="email" value="<%=user._id%>" required="">
                 <label for="email">E-mail</label>
             </div>
             <div class="form-floating mb-3">

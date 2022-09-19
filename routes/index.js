@@ -33,7 +33,8 @@ router
       res.redirect('/');
     });
   })
-.get("/profile/:username",isAuth,  homeControllers.getProfile)
+.get("/profile",isAuth,  homeControllers.getProfile)
+.post("/profile/:username",[parseUrl, parseJson] , isAuth, homeControllers.updateProfile)
 .use("/items", isAuth ,itemRoutes)
 .use("/checkout", isAuth ,checkoutRoutes)
 .use("/admin", adminRoutes)
