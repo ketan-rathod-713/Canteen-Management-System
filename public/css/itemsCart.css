@@ -148,18 +148,25 @@ h2 { color: var(--text-clr); font-size: 1.5rem; }
 }
 
 /* extra code */
+
+#appendHere{
+  border-radius: 10px;
+  background-color: rgb(202, 99, 26);
+}
+
 .billItems{
   margin: 5px;
-  background-color: darkblue;
   color: white;
   padding: 10px;
+  border-bottom: 2px solid white;
 }
 .billItems div{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto;
+  display: flex;
+  justify-content: space-between;
 }
 .billItems div div{
   text-align: left;
   /* margin: 10px 20px; */
 }
+
+

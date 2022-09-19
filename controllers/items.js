@@ -18,10 +18,17 @@ module.exports = {
     console.log(currDate)
 
     Item.find({_id: currDate}, function (err, docs) {
-      // res.send(docs);
+
+      if(docs.length === 0){
+      res.render("itemsCart", {items: []})
+      } else {
       const items = docs[0].items;
+     
+
       console.log(items)
       res.render("itemsCart", {items: items})
+      }
+     
     });
   },
 

@@ -25,13 +25,13 @@ const increase = (itemNumber) => {
 let arr = [];
 
 function addDish(element) {
+  console.log(element);
   let totalAmount = 0;
 
   let price = document.querySelector(`#price${element}`).innerHTML;
   let quantity = document.querySelector(`#q${element}`);
   quantity.defaultValue = 0;
-  let title =
-    document.getElementsByClassName("product_name")[element - 1].innerHTML;
+  let title = document.getElementById(`name${element}`).innerHTML;
 
   if (arr == null) {
     arr.push({
@@ -67,7 +67,7 @@ function addDish(element) {
     let billElem = document.createElement("div");
     billElem.innerHTML = `<h4>${ele.t}</h4>
   <div>
-      <div>Price :  ${ele.p}</div><hr>
+      <div>Price :  ${ele.p}</div>
       <div>Quantity : ${ele.q}</div>
   </div>`;
     billElem.className = "billItems";
