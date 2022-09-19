@@ -26,7 +26,7 @@ router
 .get("/signup", homeControllers.signUpGetReq )
 .post("/signup",[parseUrl, parseJson] , homeControllers.signUpPostReq)
 .get("/login",homeControllers.loginGetReq)
-.post('/login',[parseUrl, parseJson],passport.authenticate('local',{failureRedirect: '/login',successRedirect: "/checkout"}))
+.post('/login',[parseUrl, parseJson],passport.authenticate('local',{failureRedirect: '/login',successRedirect: "/"}))
 .get('/logout', function(req, res, next) { // LATER CONVERT IT TO POST REQUEST FOR STANDARD,SO THAT NO ONE ACCIDENTLY DO THIS
     req.logout(function(err) {
       if (err) { return next(err); }

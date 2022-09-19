@@ -41,7 +41,7 @@ module.exports = {
                 newUser.save()
                 .then((user)=>{
                 console.log(user)
-                res.redirect("/") // go to signIn page 
+                res.redirect("/login") // go to signIn page 
                 })
             } else {
                 // res.send(doc)
