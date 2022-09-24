@@ -2,187 +2,101 @@
 <html lang="en">
     <head>
         <!-- HEADER PART FOR EVERY PAGE -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
-   
-   
-   
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    
-     <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+        <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Admin Panel Canteen</title>
         <link rel="icon" href="logoForMeal.png">
-        <link rel="stylesheet" href="profile.css">
-        <script>
-
-        </script>
     </head>
-<body class="d-flex flex-column h-100">
-    <div class="container form-signin mt-5 localbyme">
+
+    <body class="d-flex flex-column h-100">
+        <div class="container form-signin mt-5 localbyme">
             <div id="accordion">
 
-              <h1 class="display-2"> <%= itemsToday %></h1>
+                <h5 class=" mb-4">
+                    <%= new Date() %></h5>
 
-                <div class="card">
-                  <div class="card-header" id="headingOne">
-                    <h5 class="mb-0">
-                      <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        Dinner Full Dish
-                      </button>
-                    </h5>
-                  </div>
-              
-                  <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                    <div class="card-body">
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="itemid" placeholder="itemid" value="50" name="itemid" required="" disabled>
-                            <label for="itemid">itemid</label>
+                <% itemsToday.forEach(element =>{ %>
+                    <!-- Start of cart -->
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link" data-toggle="collapse" data-target="#div<%=element.itemId%>" aria-expanded="true" aria-controls="collapseOne">
+                                    <%= element.name %>
+                                </button>
+                            </h5>
                         </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="name" placeholder="Name" value="Dinner Full Dish" name="name" required="">
-                            <label for="name">Name</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="price" placeholder="price" value="50" name="price" required="">
-                            <label for="price">Price</label>
-                        </div>
-                        
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                              <label class="input-group-text" for="inputGroupSelect01">Available </label>
+
+                        <div id="div<%=element.itemId%>" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="card-body">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="itemid" placeholder="itemid" value="<%= element.itemId %>" name="itemid" required="" disabled>
+                                    <label for="itemid">itemid</label>
+                                </div>
+                                <div class="form-floating mb-3">
+
+                                    <input type="text" class="form-control" id="name<%= element.itemId %>" placeholder="Name" value="<%= element.name %>" name="name" required="">
+                                    <label for="name">Name</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="price<%= element.itemId %>" placeholder="price" value="<%= element.price %>" name="price" required="">
+                                    <label for="price">Price</label>
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="inputGroupSelect01">Available
+                                        </label>
+                                    </div>
+                                    <select class="custom-select" id="inputGroupSelect01">
+                                        <option selected>true
+                                        </option>
+                                        <option class="bg-red" value="<%= element.available %>">false</option>
+                                    </select>
+                                </div>
+
+                                <div class="container">
+                                    <h2>Menu</h2>
+                                    <ul class="list-group" id="menu<%= element.itemId %>">
+                                        <% element.menu.forEach(elementItem=>{%>
+                                            <li class="list-group-item" style="display:flex; justify-content:space-between;">
+                                                <div class=" m-1">
+                                                    <input type="text" class="form-control menuItem<%= element.itemId %>" id="menu1" placeholder="menu1" value="<%=elementItem%>" name="itemid" required="">
+                                                </div>
+                                                <span>
+                                                    <button class="btn btn-danger">Remove</button>
+                                                </span>
+                                            </li>
+                                        <% }) %>
+                                    </ul>
+
+                                    <div class="d-flex justify-content-between">
+                                        <button class="btn btn-primary m-2" id="btn<%= element.itemId %>" onclick="onClickaddbtn(this.id)">Add New Item</button>
+                                        <button class="btn btn-primary m-2" id="update<%=element.itemId%>" onclick="onClickUpdateMenu(this.id)">Update Menu On DB</button>
+                                    </div>
+                                </div>
+
                             </div>
-                            <select class="custom-select" id="inputGroupSelect01">
-                              <option selected>true </option>
-                              <option value="1">false</option>
-                            </select>
-                          </div>
 
-                          <div class="container">
-                            <h2>Menu</h2>
-                            <ul class="list-group" id="allItemsList1">
-                                <li class="list-group-item" style="display:flex; justify-content:space-between;">
-                                    <div class=" m-1">
-                                        <input type="text" class="form-control" id="menu1" placeholder="menu1" value="Roti" name="itemid" required="">
-                                    </div>
-                                    <span><button class="btn btn-danger">Remove</button></span>
-                                </li>
-                            
-                                <li class="list-group-item menu2" style="display:flex; justify-content:space-between;">
-                                    <div class=" m-1">
-                                        <input type="text" class="form-control" id="menu2" placeholder="menu1" value="Mag mogar" name="itemid" required="">
-                                    </div>
-                                    <span><button class="btn btn-danger" id="menu2" onclick="onClickRemoveItem(this.id)">Remove</button></span>
-                                </li>
-                               
-                              </ul>
+                        </div>
 
-                              <div class="d-flex justify-content-between">
-                                <button class="btn btn-primary m-2" id="addbtn" onclick="onClickaddbtn()">Add New Item</button>
-                              <button class="btn btn-primary m-2" id="addbtn" onclick="onClickUpdateMenu()">Update Menu On DB</button>
-                              </div>
-<script>
-
-    let array = ["Roti", "Sabji"]
-
-    const onClickaddbtn = ()=>{
-   
-        var list = document.createElement('li');
-        list.className = "list-group-item";
-        list.style.display = "flex"
-        list.style.justifyContent = "space-between"
-        
-        var divInsideList = document.createElement('div');
-        divInsideList.className = "m-1"
-
-        var input = document.createElement("input")
-        input.className = "form-control"
-        input.value = ""
-        input.placeholder = "Menu Item"
-
-        divInsideList.appendChild(input)
-
-        var spanBtns = document.createElement("span")
-        var btn = document.createElement("button")
-        btn.classList.add("btn","btn-danger")
-
-        btn.textContent = "Remove"
-        spanBtns.append(btn)
-
-
-        list.appendChild(divInsideList)
-        list.appendChild(spanBtns)
-
-       document.querySelector("#allItemsList1").appendChild(list)
-    }
-
-    const onClickRemoveItem = (itemId)=>{
-        const boxes = document.querySelectorAll(`.${itemId}`);
-
-        boxes.forEach(box => {
-          box.remove();
-        });
-    }
-
-    const onClickUpdateMenu = (itemId)=>{
-        // it will inside form to do post request ha ha
-        console.log("just")
-    }
-</script>
-
-
-                          </div>
-
-                          </div>
-                        
                     </div>
-                  </div>
-                </div>
 
+                    <br>
+                <% }) %>
+            </div>
 
-                <div class="card">
-                  <div class="card-header" id="headingTwo">
-                    <h5 class="mb-0">
-                      <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        Collapsible Group Item #2
-                      </button>
-                    </h5>
-                  </div>
-                  <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                    <div class="card-body">
-                      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                    </div>
-                  </div>
-                </div>
-                <div class="card">
-                  <div class="card-header" id="headingThree">
-                    <h5 class="mb-0">
-                      <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        Collapsible Group Item #3
-                      </button>
-                    </h5>
-                  </div>
-                  <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                    <div class="card-body">
-                      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                    </div>
-                  </div>
-                </div>
-                <!-- <button class="w-100 btn btn-success mb-3" name="upd_confirm" type="submit">Update Menu Of Today</button> -->
-               
-              </div>
-            
-            
-          
+            <!-- <button class="w-100 btn btn-success mb-3" name="upd_confirm" type="submit">Update Menu Of Today</button> -->
 
-              
+        </div>
 
+        <script src="js/adminPanel.js"></script>
 
-
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-</body>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </body>
 </html>
