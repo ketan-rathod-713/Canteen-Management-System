@@ -11,7 +11,7 @@ const Order = require("../config/dbSchema").Order;
 module.exports = {
     // It is getting items (add to cart) values and now our work is to procced for payments and order  stuff
     payNow :  (req, res) => {
-      console.log(req.body)
+      console.log("Content got from checkout is  "+req.body)
         // Route for making payment
         // need to add dates for the items before placing order so that user can't order items that doesn't exist now
     const date = "2022-11-10"; // date for which we are doing payment to just confirm, or for preorder we need this 
