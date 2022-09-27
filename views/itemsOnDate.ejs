@@ -279,7 +279,7 @@ const  onClickAddItem = (btnId)=>{
     //make sure to serialize your JSON body
     body: JSON.stringify({
       itemId: itemId,
-      date: "2022-9-27",
+      date: "<%= date %>",
       type: "Dishes",
       name: name,
       menu: menuItems,
@@ -306,7 +306,7 @@ const  onClickAddItem = (btnId)=>{
 //   body: JSON.stringify(
 //     {
 //         "itemId":"3948091f579b",
-//         "date": "2022-9-24",
+//         "date": "<%=date%>",
 //         "type": "Dish",
 //         "name": "Full DIsh",
 //         "menu": ["Samosa","Chataney"],
