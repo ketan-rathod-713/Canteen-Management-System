@@ -16,7 +16,7 @@ module.exports = {
         Item.find({_id: date }, function (err, doc) {
             console.log(doc)  // Ohk the doc is an array, that's why i was getting errors
             if(typeof doc ==='undefined' || doc.length == 0){
-            res.render("itemsOnDate", {itemsToday: []})
+            res.render("itemsOnDate", {itemsToday: [], date: date})
             } else {
                 res.render("itemsOnDate", {itemsToday: doc[0]["items"], date: date})
             }
@@ -26,7 +26,7 @@ module.exports = {
     Item.find({_id: currDate }, function (err, doc) {
         console.log(doc)  // Ohk the doc is an array, that's why i was getting errors
         if(doc.length == 0){
-        res.render("itemsOnDate", {itemsToday: []})
+        res.render("itemsOnDate", {itemsToday: [], date: currDate})
         } else {
             res.render("itemsOnDate", {itemsToday: doc[0]["items"], date: currDate})
         }
