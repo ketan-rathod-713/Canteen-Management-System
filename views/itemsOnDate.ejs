@@ -15,7 +15,7 @@
     <body class="d-flex flex-column h-100">
      
         <div class="container form-signin mt-5 localbyme">
-            <button class="btn btn-primary">Add Tommorrow Items</button>
+            
             <div id="accordion">
 
                 <h2 class=" mb-4 text-center">
@@ -232,7 +232,7 @@ const onClickUpdateMenu = (btnId) => {
     //make sure to serialize your JSON body
     body: JSON.stringify({
       itemId: itemId,
-      date: "2022-9-27",
+      date: "<%=date%>",
       type: "Dishes",
       name: name,
       menu: menuItems,
@@ -295,39 +295,11 @@ const  onClickAddItem = (btnId)=>{
   });
 }
 
-// fetch("http://localhost:3000/items", {
-//   method: "post",
-//   headers: {
-//     'Accept': 'application/json',
-//     'Content-Type': 'application/json'
-//   },
-
-//   //make sure to serialize your JSON body
-//   body: JSON.stringify(
-//     {
-//         "itemId":"3948091f579b",
-//         "date": "<%=date%>",
-//         "type": "Dish",
-//         "name": "Full DIsh",
-//         "menu": ["Samosa","Chataney"],
-//         "price": 20,
-//         "available": false,
-//         "func":"addItem",
-//         "username":"ketanrtd1@gmail.com",
-//         "password":"123"
-//       }
-//   )
-// })
-// .then( (response) => {
-//     console.log(response)
-//    //do something awesome that makes the world a better place
-// });
-
         </script>
       
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <script src="/public/js/itemsOnDate.js"></script>
+        <!-- <script src="/public/js/itemsOnDate.js"></script> -->
     </body>
 </html>
