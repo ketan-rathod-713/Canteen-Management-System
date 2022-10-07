@@ -14,12 +14,22 @@
 
     <body class="d-flex flex-column h-100">
      
+
+        <div class="container bg-primary text-white p-4">
+            <h2 class="mt-4">Modify Inventary On Specific Date</h2>
+            <form action="/admin/items/date" method="post">
+                <input class="btn btn-secondary mt-2 mb-4" type="date" id="date" name="date">
+                <input class="btn btn-secondary mt-2 mb-4" type="submit">
+              </form>
+        </div>
+
+
         <div class="container form-signin mt-5 localbyme">
             
             <div id="accordion">
 
                 <h2 class=" mb-4 text-center">
-                    Today's Items</h2>
+                    Inventary On <%= date%></h2>
 
                 <% itemsToday.forEach(element =>{ %>
                     <!-- Start of cart -->
@@ -53,10 +63,12 @@
                                         <label class="input-group-text" for="inputGroupSelect01">Available
                                         </label>
                                     </div>
-                                    <select class="custom-select" id="inputGroupSelect01">
-                                        <option selected>true
+                                    <select class="custom-select" id="available<%= element.itemId %>">
+                                     
+                                        <option value="<%= element.available %>" selected> <%= element.available %>
                                         </option>
-                                        <option class="bg-red" value="<%= element.available %>">false</option>
+                                        <option value="<%= !element.available %>" class="bg-red" ><%  element.available =="true" ? "false" : "true" %></option>44
+                                     
                                     </select>
                                 </div>
 
@@ -93,25 +105,29 @@
 
             <!-- <button class="w-100 btn btn-success mb-3" name="upd_confirm" type="submit">Add Item</button> -->
 
-            <div class="card">
+            <div class="container bg-primary text-white p-4 mt-4">
+                <h2>Add New Item To Our Inventary On <%= date %></h2>
+            </div>
+
+            <!-- <div class="card">
                 <div class="card-header" id="headingOne">
                     <h5 class="mb-0">
                         <button class="btn btn-link" data-toggle="collapse" data-target="#divnewItem" aria-expanded="true" aria-controls="collapseOne">
                             ADD NEW ITEM
                         </button>
                     </h5>
-                </div>
+                </div> -->
 
-                <div id="divnewItem" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div id="divnewItem" class="collapse show bg-primary" aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="card-body">
                        
                         <div class="form-floating mb-3">
 
-                            <input type="text" class="form-control" id="namenewItem" placeholder="Name" value="newItem" name="name" required="">
+                            <input type="text" class="form-control" id="namenewItem" placeholder="Name"  name="name" required="">
                             <label for="name">Name</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="pricenewItem" placeholder="price" value="newItem" name="price" required="">
+                            <input type="text" class="form-control" id="pricenewItem" placeholder="price" value="50" name="price" required="">
                             <label for="price">Price</label>
                         </div>
 
@@ -128,12 +144,12 @@
                         </div>
 
                         <div class="container">
-                            <h2>Menu</h2>
+                            <h2 class="text-white">Menu</h2>
                             <ul class="list-group" id="menunewItem">
                                
                                     <li class="list-group-item" style="display:flex; justify-content:space-between;">
                                         <div class=" m-1">
-                                            <input type="text" class="form-control menuItemnewItem" id="menu1" placeholder="menu1" value="just" name="itemid" required="">
+                                            <input type="text" class="form-control menuItemnewItem" id="menu1" placeholder="menu1" value="" name="itemid" required="">
                                         </div>
                                         <span>
                                             <button class="btn btn-danger">Remove</button>
@@ -143,8 +159,8 @@
                             </ul>
 
                             <div class="d-flex justify-content-between">
-                                <button class="btn btn-primary m-2" id="btnnewItem" onclick="onClickaddbtn(this.id)">Add New Menu Item</button>
-                            <button class="btn btn-primary m-2" id="btnnewItem" onclick="onClickAddItem(this.id)">Add Item to Database</button>
+                                <button class="btn btn-danger m-2" id="btnnewItem" onclick="onClickaddbtn(this.id)">Add New Menu Item</button>
+                            <button class="btn btn-danger m-2" id="btnnewItem" onclick="onClickAddItem(this.id)">Add Item to Database</button>
                             </div>
 
                         </div>
@@ -211,6 +227,10 @@ const onClickUpdateMenu = (btnId) => {
   const price = document.getElementById(`price${itemId}`).value;
   // const available = document.getElementById(`price${itemId}`).value // Do something here how to know
 
+  const availableSelect = document.getElementById(`available${itemId}`);
+  const availableValue = availableSelect.options[availableSelect.selectedIndex].value;
+  console.log("available value"+ availableValue)
+
   const menu = document.querySelectorAll(`.menuItem${itemId}`);
 
   let menuItems = [];
@@ -237,7 +257,7 @@ const onClickUpdateMenu = (btnId) => {
       name: name,
       menu: menuItems,
       price: price,
-      available: true,
+      available: availableValue,
       func: "updateItem",
       username: "ketanrtd1@gmail.com",
       password: "123",
@@ -303,3 +323,7 @@ const  onClickAddItem = (btnId)=>{
         <!-- <script src="/public/js/itemsOnDate.js"></script> -->
     </body>
 </html>
+
+<!-- TODO -->
+<!-- here available is not working fine -->
+<!-- Make good UI -->

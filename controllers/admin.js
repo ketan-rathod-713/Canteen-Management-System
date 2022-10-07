@@ -35,6 +35,26 @@ module.exports = {
     }
     },
 
+    postItemsOnDate : (req, res)=>{
+        // need to change singular date, months like 01 or 06 like that
+        const date = req.body.date;
+        console.log("date is " + typeof date)
+
+        if(date.length == 0){
+            res.redirect("/admin/items")
+        } 
+        else 
+        {
+        const year = parseInt(date.substr(0,4));
+        const month = parseInt(date.substr(5,6));
+        const day = parseInt(date.substr(8,9));
+
+        const finalDate = year+"-"+month+"-"+day;
+        res.redirect(finalDate);
+        }
+    }
+
+   , 
     getAdminItemsOnDate : (req, res)=>{
         res.send("get admin panel on date")
     },
