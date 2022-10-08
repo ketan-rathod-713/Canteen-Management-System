@@ -82,8 +82,8 @@ body{
   position: relative;
   display:block;
   min-width:60px;
-  height: 60px;
-  line-height: 75px;
+  /* height: 60px; */
+  line-height: 70px;
   text-align: center;
   border-top-left-radius: 30px;
   border-bottom-left-radius: 30px;
@@ -104,24 +104,6 @@ body{
   white-space: nowrap;
 }
 
-/* .sidebar-menu ul li:hover a::before{
-  content: '';
-  position: absolute;
-  
-  right: 0;
-  top: -50px;
-  width: 50px;
-  height: 50px;
-  background: transparent;
-  border-radius: 50%;
-  box-shadow: 35px 35px 0 10px var(--color-white-hover);
-
-} */
-
-
-
-/* 
-main ::content */
 .main{
   position: absolute;
   width:calc(100% - 300px);
