@@ -8,41 +8,40 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Admin Panel Canteen</title>
-        <link rel="icon" href="logoForMeal.png">
+        <title>Admin Inventary</title>
+        <link rel="stylesheet" href="/css/itemsOnDate.css">
     </head>
 
     <body class="d-flex flex-column h-100">
-     
-
-        <div class="container bg-primary text-white p-4">
+        
+        <div class="container bg-primary text-white p-4 mainBox1">
             <h2 class="mt-4">Modify Inventary On Specific Date</h2>
             <form action="/admin/items/date" method="post">
-                <input class="btn btn-secondary mt-2 mb-4" type="date" id="date" name="date">
-                <input class="btn btn-secondary mt-2 mb-4" type="submit">
+                <input class="btn btn- mt-2 mb-4" type="date" id="date" name="date">
+                <input class="btn btn- mt-2 mb-4" type="submit">
               </form>
         </div>
 
+        <hr>
 
-        <div class="container form-signin mt-5 localbyme">
-            
+        <div class="container form-signin  mt-5 localbyme mainBox2">
+
+            <h2 class=" mb-4 text-center mainBox2Heading1">
+                Inventary On <%= date%></h2>
+
             <div id="accordion">
-
-                <h2 class=" mb-4 text-center">
-                    Inventary On <%= date%></h2>
-
                 <% itemsToday.forEach(element =>{ %>
                     <!-- Start of cart -->
-                    <div class="card">
-                        <div class="card-header" id="headingOne">
+                    <div class="card border-primary">
+                        <div class="card-header " id="headingOne">
                             <h5 class="mb-0">
-                                <button class="btn btn-link" data-toggle="collapse" data-target="#div<%=element.itemId%>" aria-expanded="true" aria-controls="collapseOne">
+                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#div<%=element.itemId%>" aria-expanded="true" aria-controls="collapseOne">
                                     <%= element.name %>
                                 </button>
                             </h5>
                         </div>
 
-                        <div id="div<%=element.itemId%>" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div id="div<%=element.itemId%>" class="collapse s" aria-labelledby="headingOne" data-parent="#accordion">
                             <div class="card-body">
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control" id="itemid" placeholder="itemid" value="<%= element.itemId %>" name="itemid" required="" disabled>
@@ -88,8 +87,8 @@
                                     </ul>
 
                                     <div class="d-flex justify-content-between">
-                                        <button class="btn btn-primary m-2" id="btn<%= element.itemId %>" onclick="onClickaddbtn(this.id)">Add New Item</button>
-                                        <button class="btn btn-primary m-2" id="update<%=element.itemId%>" onclick="onClickUpdateMenu(this.id)">Update Menu On DB</button>
+                                        <button class="btn btn-prim1 m-2" id="btn<%= element.itemId %>" onclick="onClickaddbtn(this.id)">Add New Item</button>
+                                        <button class="btn btn-prim1 m-2" id="update<%=element.itemId%>" onclick="onClickUpdateMenu(this.id)">Update Menu On DB</button>
                                     </div>
                                 </div>
 
@@ -102,23 +101,14 @@
                     <br>
                 <% }) %>
             </div>
+<hr>
 
-            <!-- <button class="w-100 btn btn-success mb-3" name="upd_confirm" type="submit">Add Item</button> -->
+        
 
-            <div class="container bg-primary text-white p-4 mt-4">
-                <h2>Add New Item To Our Inventary On <%= date %></h2>
-            </div>
-
-            <!-- <div class="card">
-                <div class="card-header" id="headingOne">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link" data-toggle="collapse" data-target="#divnewItem" aria-expanded="true" aria-controls="collapseOne">
-                            ADD NEW ITEM
-                        </button>
-                    </h5>
-                </div> -->
-
-                <div id="divnewItem" class="collapse show bg-primary" aria-labelledby="headingOne" data-parent="#accordion">
+                <div id="divnewItem" class="collapse show circular bg-prim mainBox3" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="container bg-prim circular text-white p-4 mt-4">
+                        <h2 class="text-center">Add New Item To Inventary On <%= date %></h2>
+                    </div>
                     <div class="card-body">
                        
                         <div class="form-floating mb-3">
@@ -127,7 +117,7 @@
                             <label for="name">Name</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="pricenewItem" placeholder="price" value="50" name="price" required="">
+                            <input type="text" class="form-control" id="pricenewItem" placeholder="price" value="" name="price" required="">
                             <label for="price">Price</label>
                         </div>
 
@@ -159,8 +149,8 @@
                             </ul>
 
                             <div class="d-flex justify-content-between">
-                                <button class="btn btn-danger m-2" id="btnnewItem" onclick="onClickaddbtn(this.id)">Add New Menu Item</button>
-                            <button class="btn btn-danger m-2" id="btnnewItem" onclick="onClickAddItem(this.id)">Add Item to Database</button>
+                                <button class="btn btn-prim1 m-2" id="btnnewItem" onclick="onClickaddbtn(this.id)">Add New Menu Item</button>
+                            <button class="btn btn-prim1 m-2" id="btnnewItem" onclick="onClickAddItem(this.id)">Add Item to Database</button>
                             </div>
 
                         </div>
@@ -168,12 +158,6 @@
                     </div>
 
                 </div>
-
-            </div>
-
-            <br>
-
-        </div>
 
         <script>
             // let array = ["Roti", "Sabji"]
@@ -266,6 +250,7 @@ const onClickUpdateMenu = (btnId) => {
     console.log(response);
     //do something awesome that makes the world a better place
   });
+  location.reload()
 };
 
 
@@ -313,6 +298,7 @@ const  onClickAddItem = (btnId)=>{
     console.log(response);
     //do something awesome that makes the world a better place
   });
+  location.reload()
 }
 
         </script>
