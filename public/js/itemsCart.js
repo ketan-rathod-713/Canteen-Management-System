@@ -59,6 +59,8 @@ function addDish(element) {
       p: Number(price),
       q: quantity.value,
     });
+
+  document.getElementById("StringData").value = JSON.stringify({arr});
   }
 
   document.getElementById("appendHere").innerHTML = "";

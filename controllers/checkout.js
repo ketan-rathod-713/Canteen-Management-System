@@ -8,26 +8,46 @@ const parseUrl = express.urlencoded({ extended: false });
 const parseJson = express.json({ extended: false });
 const Order = require("../config/dbSchema").Order;
 
-module.exports = {
-    // It is getting items (add to cart) values and now our work is to procced for payments and order  stuff
+module.exports = {  
+  
+  // It is getting items (add to cart) values and now our work is to procced for payments and order  stuff
+
     payNow :  (req, res) => {
-      console.log("Content got from checkout is  "+req.body)
+    console.log("Content got from checkout is  "+ req.body.StringData) // why error on only req.body
+
+    const jsonItemsgot = JSON.parse(req.body.StringData);
+
+    console.log("json items : "+ jsonItemsgot.arr[0].id) // it is working fine wow 
+
+    const allItemsGot = jsonItemsgot.arr; // arr is what contains the required items
+
+    // calculate total cost here
+    let totalCostGot = 0;
+    for(let i=0; i<allItemsGot.length;i++){
+      totalCostGot += allItemsGot[i].q * allItemsGot[i].p;
+    }
+
+    console.log("total cost is "+ totalCostGot)
+
+    console.log("user is "+  req.user) // if not then handle or handle in route it self
+
         // Route for making payment
         // need to add dates for the items before placing order so that user can't order items that doesn't exist now
     const date = "2022-11-10"; // date for which we are doing payment to just confirm, or for preorder we need this 
-    const allItems = [{itemId: "abcd", itemQt: 1},{itemId: "abcdefg", itemQt: 3},] // map all items with original ones
-    const totalAmount = 1; //default
-    const userName = "Aman";
-    const userPhone = "9725488060"
-    const userEmail = "ketanrtd1@gmail.com"
+    const allItems = allItemsGot; // map all items with original ones
+    const totalAmount = totalCostGot; //default
+    const userName = req.user.firstname;
+    const userPhone = req.user.phone
+    const userEmail = req.user._id
+    const userId = req.user._id
 
-    const orderId = crypto.randomBytes(12).toString('hex');
+    const orderId = date + crypto.randomBytes(6).toString('hex');
     const currTime = new Date();
     
     const orderDetails = {
             _id : orderId,
             userName: userName,
-            userId: "dsfiwefewof", // need it to hover for database 
+            userId: userId, // need it to hover for database 
             paytmUserName: "@ketanrtd713",
             userEmail: userEmail,
             userPhone: userPhone,
@@ -40,9 +60,9 @@ module.exports = {
 
         const order = new Order(orderDetails);
 
-        order.save();
+        order.save(); // stored in orders for admin, Now also store in users database
 
-        // ALSO SAVE IT IN USER's DATABASE
+        // ALSO SAVE IT IN USER's DATABASE with complete orders
 
         console.log(orderDetails)
 
@@ -65,7 +85,7 @@ module.exports = {
           params["WEBSITE"] = config.PaytmConfig.website;
           params["CHANNEL_ID"] = "WEB";
           params["INDUSTRY_TYPE_ID"] = "Retail";
-          params["ORDER_ID"] = orderDetails._id;  // we have made this ?? how can we use it.
+          params["ORDER_ID"] = orderDetails._id;  // we have made this ?? how can we use it. it is our custom order id
           params["CUST_ID"] = paymentDetails.customerId;
           params["TXN_AMOUNT"] = paymentDetails.amount; // we are passing this
           params["CALLBACK_URL"] = `http://localhost:3000/checkout/order/${orderDetails._id}`; // callback to call when payment done or success so need to add entries in database when such event occurs
@@ -135,24 +155,17 @@ paymentCallback : (req, res) => {
 
     // TODO : here check the details informations and update the orderId with respective values in background and redirect another with different route
     
-      
+    console.log("status is " + post_data.STATUS)
     const orderDetails = {
       _id : post_data.ORDERID,
-      // userName: userName,
-      // paytmUserName: "@ketanrtd713",
-      // userEmail: userEmail,
-      // userPhone: userPhone,
-      // totalAmount : totalAmount,
-      // allItems: allItems,
-      orderStatus: post_data.STATUS ? "Ongoing" : "Failed",
+      orderStatus: post_data.STATUS == "TXN_FAILURE" ? "Failed" : "Pending", // should i just not accept order if payment is not done
       paymentStatus: post_data.STATUS,
       timeWhenOrderPlaced: new Date()
   }
 
-  
+  // update order here
 
-  // order.save();
-
+  // save this info. in database
 
     checksum_lib.genchecksum(
       params,
@@ -185,9 +198,9 @@ paymentCallback : (req, res) => {
 
             var _result = JSON.parse(response);
             if (_result.STATUS == "TXN_SUCCESS") {
-              res.send("payment sucess");
+              res.send({success: "payment sucess", "S2S response": _result});
             } else {
-              res.send(orderDetails);
+              res.send({orderDetails: orderDetails, "S2S Respornse": _result});
             }
           });
         });
@@ -197,6 +210,8 @@ paymentCallback : (req, res) => {
         post_req.end();
       }
     );
+
+
   });
 }
     }
