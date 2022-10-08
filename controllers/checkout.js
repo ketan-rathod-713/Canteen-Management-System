@@ -213,5 +213,17 @@ paymentCallback : (req, res) => {
 
 
   });
+},
+
+getOrderDetails: (req, res)=>{
+  const orderId = req.params.orderId
+  console.log(orderId)
+  Order.findById(orderId, (err, docs)=>{
+    if(docs){
+      res.send(docs)
+    } else {
+      res.send({message: `The given `+ orderId+ `orderId doesn't exists here..`})
+    }
+  })
 }
     }
