@@ -11,38 +11,34 @@ const dbSchema = require('../config/dbSchema')
 const Item = dbSchema.Item;
 
 module.exports = {  
-  
-  // It is getting items (add to cart) values and now our work is to procced for payments and order  stuff
-
+  // It will be used to do payment, make order reciept with order id and redirect to paytm's url for payment
     payNow :  (req, res) => {
-    console.log("Content got from checkout is  "+ req.body.StringData) // why error on only req.body
 
+      console.log("Content got from checkout is  "+ req.body.StringData) // It shows error when only req.body why ??
+    
     const jsonItemsgot = JSON.parse(req.body.StringData);
 
-    console.log("json items : "+ jsonItemsgot.arr[0].id) // it is working fine wow 
+      console.log("json items : "+ jsonItemsgot.arr[0].id) 
 
-    const allItemsGot = jsonItemsgot.arr; // arr is what contains the required items
+    const allItemsGot = jsonItemsgot.arr; // arr contains required items for order
 
-    // calculate total cost here
-    let totalCostGot = 0;
+    let totalCostGot = 0; // totalCost of order
     for(let i=0; i<allItemsGot.length;i++){
       totalCostGot += allItemsGot[i].q * allItemsGot[i].p;
     }
 
-    console.log("total cost is "+ totalCostGot)
+      console.log("total cost is "+ totalCostGot)
 
-    console.log("user is "+  req.user) // if not then handle or handle in route it self
+      console.log("user is "+  req.user) // if not then handle or handle in route it self
 
-        // Route for making payment
-        // need to add dates for the items before placing order so that user can't order items that doesn't exist now
-    const date = "2022-11-10"; // date for which we are doing payment to just confirm, or for preorder we need this 
+    // All Required Items
+    const date = "2022-11-10"; //currently it is the date for which we are doing payment to just confirm, or for preorder we need this 
     const allItems = allItemsGot; // map all items with original ones
     const totalAmount = totalCostGot; //default
     const userName = req.user.firstname;
     const userPhone = req.user.phone
     const userEmail = req.user._id
     const userId = req.user._id
-
     const orderId = date + crypto.randomBytes(6).toString('hex');
     const currTime = new Date();
     
@@ -64,7 +60,7 @@ module.exports = {
 
         order.save(); // stored in orders for admin, Now also store in users database
 
-        // ALSO SAVE IT IN USER's DATABASE with complete orders
+        // ALSO SAVE IT IN USER's DATABASE IF WANT
 
         console.log(orderDetails)
 
@@ -125,8 +121,8 @@ module.exports = {
         }
     },
 
-paymentCallback : (req, res) => {
   // Route for verifiying payment, it is like a webhook and called by paytm ig, but how paytm can call my localhost ??
+paymentCallback : (req, res) => {
 
   var body = "";
 
@@ -166,6 +162,7 @@ paymentCallback : (req, res) => {
   }
 
 
+  // Updating Order with current status
   Order.findByIdAndUpdate(
     orderDetails._id,
     { $set: { paymentStatus: orderDetails.paymentStatus, orderStatus: orderDetails.orderStatus} },
@@ -176,9 +173,7 @@ paymentCallback : (req, res) => {
     }
   );
 
-  // update order here
-
-  // save this info. in database
+  // save this info. in database if storing details in users info.
 
     checksum_lib.genchecksum(
       params,
@@ -223,8 +218,6 @@ paymentCallback : (req, res) => {
         post_req.end();
       }
     );
-
-
   });
 },
 
@@ -233,23 +226,11 @@ getOrderDetails: (req, res)=>{
   console.log(orderId)
   Order.findById(orderId, (err, docs)=>{
     if(docs){
-      // for items of docs find items informations to display
-      
-      // let itemsArrayToReturn = []
-      // let items = docs.allItems;
-      // items.forEach(element => {
-      //   console.log(element)
-      //   const itmId = element.id
-      //   console.log(itmId)
-      //   Item.find({}, (err, itm)=>{
-      //     console.log(itm)
-      //   })
-      // });
-      
       res.render("orderDetails",{orderDetails: docs })
     } else {
       res.send({message: `The given `+ orderId+ `orderId doesn't exists here..`})
     }
   })
+  },
+
 }
-    }
