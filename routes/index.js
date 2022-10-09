@@ -14,7 +14,9 @@ const adminRoutes = require("./admin")
 // CONTROLLERS
 const homeControllers = require("../controllers/home");
 const home = require("../controllers/home");
+const client = require("../controllers/client");
 const { isAuth } = require("../middlewares/authMiddleware");
+const { getHistory } = require("../controllers/client");
 
 // ROUTER TO EXPORT
 const router = express.Router();
@@ -34,6 +36,7 @@ router
     });
   })
 .get("/profile",isAuth,  homeControllers.getProfile)
+.get("/client", getHistory)
 .post("/profile/:username",[parseUrl, parseJson] , isAuth, homeControllers.updateProfile)
 .use("/items", isAuth ,itemRoutes)
 .use("/checkout", isAuth ,checkoutRoutes)

@@ -28,7 +28,7 @@ module.exports = {
       console.log(items)
       res.render("itemsCart", {items: items})
       }
-     
+       
     });
   },
 

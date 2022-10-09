@@ -19,11 +19,20 @@
     "express-session": "^1.17.3",
     "https": "^1.0.0",
     "mongo-store": "^0.0.2",
-    "mongoose": "^6.6.0",
+    "mongoose": "^6.6.5",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.19",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "querystring": "^0.2.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ketanrtd713/Canteen-Management-System.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/ketanrtd713/Canteen-Management-System/issues"
+  },
+  "homepage": "https://github.com/ketanrtd713/Canteen-Management-System#readme"
 }

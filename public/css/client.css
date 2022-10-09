@@ -1,0 +1,16 @@
+
+*{
+    padding: 0;
+    margin: 0;
+}
+.header{
+    background-color: rgb(75, 41, 41);
+}
+
+.header h1{
+    text-align: center;
+    color: white;
+}
+.col-sm{
+    background-color: #A1A1A1;
+}
