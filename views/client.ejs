@@ -11,6 +11,9 @@
 
   
     <title>Order History</title>
+    <style>
+        
+    </style>
 </head>
 <body>
     <div class="header">
@@ -32,14 +35,18 @@
           </div>
           </div>
           <hr>
-     <% for(i=0; i<data.length; i++){ %>
+     <% for(i=data.length-1; i>=0; i--){ %>
 
         <div class="row">
           <div class="col-sm">
             <p><%= data[i]._id %></p>
           </div>
           <div class="col-sm">
-            <p><%= data[i]._id %></p>
+            <% for(let j=0; j< data[i].allItems.length ; j++){ %>
+            <p><%= data[i].allItems[j].t %>
+
+            <%}%>
+            </p>
         </div>
           <div class="col-sm">
             <p><%= data[i].orderStatus %></p>

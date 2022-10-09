@@ -1,0 +1,96 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap');
+
+:root{
+  --blue:#287bff;
+  --grey:#f5f5f5;
+  --black1:#222;
+  --black2:#999;
+  --color-white-hover: 	
+  #FFFFFF;
+
+}
+
+.first-color { 
+	background: #005689; 
+}
+	
+.second-color { 
+	background: #007cb9; 
+}
+
+.third-color { 
+	background: #d5eeff; 
+}
+
+.fourth-color { 
+	background: #ff895d; 
+}
+
+
+.fourth-color { 
+
+    background: #f2f2f2; 
+
+}
+
+.details table{
+  width: 200%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+
+.details  table thead td{
+   font-weight: 600;
+}
+
+
+
+.details .recentorder table  thead tr{
+  background: #005689;
+  border-bottom: 1px solid rgba(20, 37, 228, 0.516);
+  transition: transform .2s;
+}
+
+.details .recentorder table tr:last-child{
+  border-bottom: none;
+}
+
+.details .recentorder table {
+  border: 220px;
+}
+.details.recentcustomers table tbody tr{
+  padding: 20px;
+  background: #d5eeff; 
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  transition: all;
+}
+
+.details .recentorder table tbody tr:hover{
+  background: var(--blue);
+  transform: scale3d(1.5);
+  color: var(--color-white-hover);
+}
+
+
+.details .recentorder table tr td{
+  padding: 10px;
+}
+
+
+.details .recentorder table tr td :last-child{
+  text-align: center;
+}
+
+.details .recentorder table tr td :nth-child(3){
+  text-align: center;
+}
+
+.details .recentorder table tr td :nth-child(5)
+{
+  text-align: center;
+}
+
+
