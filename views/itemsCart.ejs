@@ -80,7 +80,7 @@
                   <!-- price -->
                   <div class="row">
                     <div class="col-8 d-flex justify-content-between remove_wish">
-                      <% if( items[i].available ){ %>
+                      <% if( items[i].available == "true" ){ %>
                       <button class="btn btn-primary" id="<%= items[i].itemId%>" onclick="addDish(this.id)">ADD ITEM</button>
                       <%} else {%>
                       <button disabled class="btn btn-danger" id="<%= items[i].itemId%>" onclick="addDish(this.id) ">ADD ITEM</button>
@@ -127,7 +127,7 @@
               <!-- ckeckout button -->
               <form action="/checkout" method="post">
               <a href="#">
-                <button value=`${arr}` class="btn btn-primary text-uppercase ">Checkout</button>
+                <button value=`${arr}` id="checkOut" class="btn btn-primary text-uppercase ">Checkout</button>
               </a>
               <input hidden type="text" name="StringData" id="StringData">
             </form>

@@ -24,7 +24,17 @@ const increase = (itemNumber) => {
 
 let arr = [];
 
+// to disable checkout button if no item is added.
+if(arr.length == 0){
+  document.getElementById('checkOut').disabled = true;
+} else {
+  document.getElementById('checkOut').disabled = false;
+}
+
 function addDish(element) {
+  //to enable checkout button.
+  document.getElementById('checkOut').disabled = false;
+
   console.log(element);
   let totalAmount = 0;
 
@@ -146,4 +156,13 @@ function removeDish(element){
 
   productTotal.innerHTML = ` ${totalAmount}`;
   grandTotal.innerHTML = ` ${totalAmount}`;
+
+  
+// to disable checkout button if no arr is empty.
+if(arr.length == 0){
+  document.getElementById('checkOut').disabled = true;
+} else {
+  document.getElementById('checkOut').disabled = false;
+}
+
 }
