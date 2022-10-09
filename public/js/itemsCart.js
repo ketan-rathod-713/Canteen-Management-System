@@ -72,7 +72,6 @@ function addDish(element) {
       r: 0,
     });
 
-  document.getElementById("StringData").value = JSON.stringify({arr});
   }
 
   document.getElementById("appendHere").innerHTML = "";
@@ -100,6 +99,8 @@ let removeCount = 0;
 
   productTotal.innerHTML = ` ${totalAmount}`;
   grandTotal.innerHTML = ` ${totalAmount}`;
+  document.getElementById("StringData").value = JSON.stringify({arr});
+
   }
 }
 
