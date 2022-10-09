@@ -160,10 +160,21 @@ paymentCallback : (req, res) => {
     console.log("status is " + post_data.STATUS)
     const orderDetails = {
       _id : post_data.ORDERID,
-      orderStatus: post_data.STATUS == "TXN_FAILURE" ? "Failed" : "Pending", // should i just not accept order if payment is not done
+      orderStatus: post_data.STATUS == "TXN_FAILURE" ? "Failed" : "Ongoing", // should i just not accept order if payment is not done
       paymentStatus: post_data.STATUS,
       timeWhenOrderPlaced: new Date()
   }
+
+
+  Order.findByIdAndUpdate(
+    orderDetails._id,
+    { $set: { paymentStatus: orderDetails.paymentStatus, orderStatus: orderDetails.orderStatus} },
+    { new: true, upsert: true },
+    function (err, managerparent) {
+      if (err) throw err;
+      console.log(managerparent); // updated value here
+    }
+  );
 
   // update order here
 
