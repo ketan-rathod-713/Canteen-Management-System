@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Order Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+    <style>
+        .mainBox{
+            padding: 20px;
+        }
+
+        .mainBox2{
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            
+        }
+
+        .heading{
+            padding: 20px;
+            background-color: #FEA116;
+            color: white;
+        }
+        img{
+          max-width: 100px;
+        }
+        th{
+          
+        }
+        table {
+          padding: 10px;
+        }
+    </style>
+  </head>
+  <body>
+   
+
+    <div class="mainBox">
+
+        <div class="mainBox1">
+
+            <div class="heading">
+                <h1 class="text-center">Order Summary</h1>
+            </div>
+
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Order Id</th>
+                    <th scope="col"><%= orderDetails._id%></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Order Status</td>
+                    <td><%= orderDetails.orderStatus%></td>
+                  </tr>
+                  <tr>
+                    <td>Payment Status</td>
+                    <td><%= orderDetails.paymentStatus%></td>
+                  </tr> 
+                  <tr>
+                    <td>Time</td>
+                    <td><%= orderDetails.timeWhenOrderPlaced%></td>
+                  </tr> 
+                  <tr>
+                    <td>User Email</td>
+                    <td><%= orderDetails.userEmail%></td>
+                  </tr> 
+                  <tr>
+                    <td>Sub Total</td>
+                    <td><%= orderDetails.totalAmount%> RS</td>
+                  </tr> 
+                </tbody>
+              </table>
+        </div>
+
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Product Info</th>
+                <th scope="col">Product Price</th>
+              </tr>
+            </thead>
+            
+            <tbody>
+              <% for(let i=0; i< orderDetails.allItems.length; i++){ %> 
+              <tr>
+                <th scope="row"><%=i+1%></th>
+                
+                <td>
+                    <h5><%= orderDetails.allItems[i].t %></h5>
+                    <p>Menu : Need to Implement</p>
+                </td>
+                <td>
+                    <p>Price : <%= orderDetails.allItems[i].p %></p>
+                    <p>Quantity : <%= orderDetails.allItems[i].q %></p>
+                </td>
+              </tr>
+             <%}%>
+            </tbody>
+          </table>      
+    </div>
+    <!-- Just to see
+    <%= orderDetails %> -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+  </body>
+</html>

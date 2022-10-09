@@ -17,7 +17,7 @@
   <title>Order Now</title>
 
 </head>
-
+  
 
 <body>
 
@@ -91,7 +91,7 @@
                     </div>
                   </div>
                   <div class="d-flex justify-content-end">
-                  <small><%= items[i].lastUpdated.toString().substring(4,21)%></small>
+                  <small> last updated - <%= items[i].lastUpdated.toString().substring(4,21)%></small>
                   </div>
                 </div>
               </div>
@@ -109,7 +109,7 @@
             <div class="right_side p-3 shadow bg-white" style="position: sticky;top:10px;">
               <h2 class=" mb-5">The Total Amount Of</h2>
               <!-- things will append in below div-->
-              <form action="/checkout" method="post">
+              
               <div id="appendHere">
 
               </div>
@@ -125,7 +125,7 @@
                 <p>₹<span id="total_cart_amt">0.00</span></p>
               </div>
               <!-- ckeckout button -->
-              
+              <form action="/checkout" method="post">
               <a href="#">
                 <button value=`${arr}` class="btn btn-primary text-uppercase ">Checkout</button>
               </a>

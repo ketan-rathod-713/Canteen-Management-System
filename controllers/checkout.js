@@ -7,6 +7,8 @@ const checksum_lib = require("../Paytm/checksum")
 const parseUrl = express.urlencoded({ extended: false });
 const parseJson = express.json({ extended: false });
 const Order = require("../config/dbSchema").Order;
+const dbSchema = require('../config/dbSchema')
+const Item = dbSchema.Item;
 
 module.exports = {  
   
@@ -158,10 +160,21 @@ paymentCallback : (req, res) => {
     console.log("status is " + post_data.STATUS)
     const orderDetails = {
       _id : post_data.ORDERID,
-      orderStatus: post_data.STATUS == "TXN_FAILURE" ? "Failed" : "Pending", // should i just not accept order if payment is not done
+      orderStatus: post_data.STATUS == "TXN_FAILURE" ? "Failed" : "Ongoing", // should i just not accept order if payment is not done
       paymentStatus: post_data.STATUS,
       timeWhenOrderPlaced: new Date()
   }
+
+
+  Order.findByIdAndUpdate(
+    orderDetails._id,
+    { $set: { paymentStatus: orderDetails.paymentStatus, orderStatus: orderDetails.orderStatus} },
+    { new: true, upsert: true },
+    function (err, managerparent) {
+      if (err) throw err;
+      console.log(managerparent); // updated value here
+    }
+  );
 
   // update order here
 
@@ -213,5 +226,30 @@ paymentCallback : (req, res) => {
 
 
   });
+},
+
+getOrderDetails: (req, res)=>{
+  const orderId = req.params.orderId
+  console.log(orderId)
+  Order.findById(orderId, (err, docs)=>{
+    if(docs){
+      // for items of docs find items informations to display
+      
+      // let itemsArrayToReturn = []
+      // let items = docs.allItems;
+      // items.forEach(element => {
+      //   console.log(element)
+      //   const itmId = element.id
+      //   console.log(itmId)
+      //   Item.find({}, (err, itm)=>{
+      //     console.log(itm)
+      //   })
+      // });
+      
+      res.render("orderDetails",{orderDetails: docs })
+    } else {
+      res.send({message: `The given `+ orderId+ `orderId doesn't exists here..`})
+    }
+  })
 }
     }

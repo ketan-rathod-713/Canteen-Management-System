@@ -61,5 +61,9 @@ module.exports = {
 
     getAdminPanel: (req, res)=>{
         res.render("adminPanel")
+    },
+
+    getOrdersAll: (req, res)=>{
+        res.render("adminOrders")
     }
 }
