@@ -7,6 +7,8 @@ const checksum_lib = require("../Paytm/checksum")
 const parseUrl = express.urlencoded({ extended: false });
 const parseJson = express.json({ extended: false });
 const Order = require("../config/dbSchema").Order;
+const dbSchema = require('../config/dbSchema')
+const Item = dbSchema.Item;
 
 module.exports = {  
   
@@ -220,7 +222,20 @@ getOrderDetails: (req, res)=>{
   console.log(orderId)
   Order.findById(orderId, (err, docs)=>{
     if(docs){
-      res.send(docs)
+      // for items of docs find items informations to display
+      
+      // let itemsArrayToReturn = []
+      // let items = docs.allItems;
+      // items.forEach(element => {
+      //   console.log(element)
+      //   const itmId = element.id
+      //   console.log(itmId)
+      //   Item.find({}, (err, itm)=>{
+      //     console.log(itm)
+      //   })
+      // });
+      
+      res.render("orderDetails",{orderDetails: docs })
     } else {
       res.send({message: `The given `+ orderId+ `orderId doesn't exists here..`})
     }
