@@ -12,7 +12,7 @@ const db = require("./config/db").dev
 // const db = require("../server/config/db").prod
 
 mongoose.connect(db.database);
-
+ 
 const app = express();
 
 // GENERAL MIDDLEWARES
