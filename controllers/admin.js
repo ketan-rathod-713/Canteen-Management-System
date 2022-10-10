@@ -1,6 +1,7 @@
 const express = require("express")
 const dbSchema = require('../config/dbSchema')
 const Item = dbSchema.Item;
+const Order = dbSchema.Order;
 
 module.exports = {
     getItemsOnDate : (req, res)=>{
@@ -64,6 +65,11 @@ module.exports = {
     },
 
     getOrdersAll: (req, res)=>{
-        res.render("adminOrders")
+
+        Order.find((err, docs)=>{
+            res.send(docs)
+        })
+
+        // res.render("adminOrders")
     }
 }

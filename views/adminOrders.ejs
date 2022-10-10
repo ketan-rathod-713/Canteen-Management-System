@@ -1,204 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="css/adminOrders.css">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/adminOrders.css">
+        <title>All Orders</title>
+    </head>
+    <body>
 
 
+        <div class="details">
+            <div class="recentorder">
 
-  
-</head>
-<body>
+                <div class="cardheader">
 
-  
+                    <h2>
+                        Order Details
+                    </h2>
 
-  <div class="details">
-    <div class="recentorder">
+                    <a href="#" class="btn" onclick="sort(0)">Sort By Order Id</a>
 
-      <div class="cardheader">
+                </div>
+
+                <div class="details">
+
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>
+                                    Order Id
+                                </td>
+                                <td>
+                                    Item
+                                </td>
+                                <td>
+                                    Price
+                                </td>
+                                <td>
+                                    Status
+                                </td>
+
+                            </tr>
+                        </thead>
+
+                        <tbody class="table">
+                            <tr>
+                                <td>2222</td>
+                                <td>Meal</td>
+                                <td>Paid</td>
+                                <td>
+                                    <span class="statusdelivered">Delevired</span>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>1211</td>
+                                <td>Meal</td>
+                                <td>Paid</td>
+                                <td>
+                                    <span class="statusdelivered">Delevired</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>1223</td>
+                                <td>100</td>
+                                <td>Paid</td>
+                                <td>
+                                    <span class="statuspending">Pending</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>21312</td>
+                                <td>100</td>
+                                <td>Paid</td>
+                                <td>
+                                    <span class="statusdelivered">Delevired</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>23321</td>
+                                <td>Meal</td>
+                                <td>100</td>
+                                <td>
+                                    <span class="statusinprogress">In Progress</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3323</td>
+                                <td>Meal</td>
+                                <td>100</td>
+                                <td>
+                                    <span class="statusdelivered">Delevired</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>1231</td>
+                                <td>Meal</td>
+                                <td>100</td>
+                                <td>
+                                    <span class="statuspending">Pending</span>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+
+            </div>
+
+            <script>
+                function sort(n) {
+                    var table,
+                        i,
+                        x,
+                        y;
+                    table = document.getElementsByClassName("table");
+                    var switching = true;
+
+                    while (switching) {
+                        switching: false;
+                        var rows = table.rows;
+                        for (i = 1; i < (rows.lenght - 1); i++) {
+                            var Switch = false
+                            x = rows[i].getElementsByTagName("TD")[0];
+                            y = rows[i + 1].getElementsByTagName("TD")[0];
+
+                            if (Number(x.innerHTML()) > Number(y.innerHTML())) {
+                                Switch = true;
+                                break;
+
+
+                            }
+
+                            if (Switch) {
+                                rows[i].parentNode.inserBefore(rows[i + 1], rows[i]);
+                                switching = true;
+                            }
+                        }
+                    }
+
+
+                }
+            </script>
+            <!--new customers-->
+        <!-- <div class="recentcustomers">
         
-        <h2>
-        Order Details 
-      </h2>
+              <div class="caedheader">
+                <h2>
+                Recent Customers
+              </h2>
+            </div>
+        
+              <table>
+                <tr>
+                  <td witdh="60px">
+                    <div class="img">  <ion-icon name="person-circle-outline"></ion-icon>
+                    </div>
+                    <td><h4>Majnu bhai <br> <span>MUMBAI</span></h4></td>
+                  </td>
+                </tr>
+        
+                <tr>
+                  <td witdh="60px">
+                    <div class="img">  <ion-icon name="person-circle-outline"></ion-icon>
+                    </div>
+                    <td><h4>Modi Ji <br><span>MUMBAI</span></h4></td>
+                  </td>
+                </tr>
+        
+                <tr>
+                  <td witdh="60px">
+                    <div class="img">  <ion-icon name="person-circle-outline"></ion-icon>
+                    </div>
+                    <td><h4>Uday bhai <br><span>MUMBAI</span></h4></td>
+                  </td>
+                </tr>
+        
+                <tr>
+                  <td witdh="60px">
+                    <div class="img">  <ion-icon name="person-circle-outline"></ion-icon>
+                    </div>
+                    <td><h4>Aman Shukla <br> <span>MUMBAI</span></h4></td>
+                  </td>
+                </tr>
+                <tr>
+                  <td witdh="60px">
+                    <div class="img">  <ion-icon name="person-circle-outline"></ion-icon>
+                    </div>
+                    <td><h4>Amit Ji <br><span>MUMBAI</span></h4></td>
+                  </td>
+                </tr>
+        
+              </table> -->
 
-      <a href="#" class="btn"  onclick="sort(0)">Sort By Order Id</a>
 
-      </div>
-
-      <div class="details">
-
-
-        <table>
-          <thead>
-            <tr>
-            <td>
-              Order Id
-            </td>
-            <td>
-              Item
-            </td>
-            <td>
-              Price
-            </td>
-            <td>
-              Status 
-            </td>
+            <!-- </div>
             
-          </tr>
-          </thead>
-    
-          <tbody class="table">
-            <tr>
-              <td>2222</td>
-              <td>Meal</td>
-              <td>Paid</td>
-              <td><span class="statusdelivered">Delevired</span></td>
-            </tr>
-    
-            <tr>
-              <td>1211</td>
-              <td>Meal</td>
-              <td>Paid</td>
-              <td><span class="statusdelivered">Delevired</span></td>
-            </tr>
-            <tr>
-              <td>1223</td>
-              <td>100</td>
-              <td>Paid</td>
-              <td><span class="statuspending">Pending</span></td>
-            </tr>
-            <tr>
-              <td>21312</td>
-              <td>100</td>
-              <td>Paid</td>
-              <td><span class="statusdelivered">Delevired</span></td>
-            </tr>
-            <tr>
-              <td>23321</td>
-              <td>Meal</td>
-              <td>100</td>
-              <td><span class="statusinprogress">In Progress</span></td>
-            </tr>
-            <tr>
-              <td>3323</td>
-              <td>Meal</td>
-              <td>100</td>
-              <td><span class="statusdelivered">Delevired</span></td>
-            </tr>
-            <tr>
-              <td>1231</td>
-              <td>Meal</td>
-              <td>100</td>
-              <td><span class="statuspending">Pending</span></td>
-            </tr>
-    
-          </tbody>
-      </table>
-      
-      </div>
-
-   
-    </div>
-
-    <script>
-      function sort (n){
-        var table,i,x,y;
-        table = document.getElementsByClassName("table");
-        var switching = true;
-        
-        while(switching){
-          switching: false;
-          var rows =table.rows;
-            for (i=1;i<(rows.lenght-1);i++){
-              var Switch = false
-              x=rows[i].getElementsByTagName("TD")[0];
-              y=rows[i+1].getElementsByTagName("TD")[0];
-
-              if( Number(x.innerHTML()) >  Number(y.innerHTML()) ){
-                Switch =true;
-                break;
-
-
-              }
-
-              if(Switch){
-                rows[i].parentNode.inserBefore(rows[i+1],rows[i]);
-                switching=true;
-              }
-            }
-        }
-
-      
-      }
-    </script>
-    <!--new customers-->
-    <!-- <div class="recentcustomers">
-
-      <div class="caedheader">
-        <h2>
-        Recent Customers
-      </h2>
-    </div>
-
-      <table>
-        <tr>
-          <td witdh="60px">
-            <div class="img">  <ion-icon name="person-circle-outline"></ion-icon>
-            </div>
-            <td><h4>Majnu bhai <br> <span>MUMBAI</span></h4></td>
-          </td>
-        </tr>
-
-        <tr>
-          <td witdh="60px">
-            <div class="img">  <ion-icon name="person-circle-outline"></ion-icon>
-            </div>
-            <td><h4>Modi Ji <br><span>MUMBAI</span></h4></td>
-          </td>
-        </tr>
-
-        <tr>
-          <td witdh="60px">
-            <div class="img">  <ion-icon name="person-circle-outline"></ion-icon>
-            </div>
-            <td><h4>Uday bhai <br><span>MUMBAI</span></h4></td>
-          </td>
-        </tr>
-
-        <tr>
-          <td witdh="60px">
-            <div class="img">  <ion-icon name="person-circle-outline"></ion-icon>
-            </div>
-            <td><h4>Aman Shukla <br> <span>MUMBAI</span></h4></td>
-          </td>
-        </tr>
-        <tr>
-          <td witdh="60px">
-            <div class="img">  <ion-icon name="person-circle-outline"></ion-icon>
-            </div>
-            <td><h4>Amit Ji <br><span>MUMBAI</span></h4></td>
-          </td>
-        </tr>
-
-      </table> -->
-
-     
-
-  <!-- </div>
-
-
-
-
-    </div>
-  </div>
-
-
-
-  </div>
-</div> -->
-  
-</body>
+            
+            
+            
+                </div>
+              </div>
+            
+            
+            
+              </div>
+            </div> -->
+        </body>
+    </body>
 </html>

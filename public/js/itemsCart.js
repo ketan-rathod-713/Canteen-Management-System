@@ -42,6 +42,7 @@ function addDish(element) {
   let quantity = document.querySelector(`#q${element}`);
   quantity.defaultValue = 0;
   let title = document.getElementById(`name${element}`).innerHTML;
+  let menu = document.getElementById(`menu${element}`).innerHTML;
 
   if(quantity.value == 0){
     alert("Add at least 1 item");
@@ -55,6 +56,7 @@ function addDish(element) {
       p: Number(price),
       q: Number(quantity.value),
       r: 0,
+      m: menu
     });
   }
 
@@ -80,6 +82,7 @@ function addDish(element) {
       p: Number(price),
       q: quantity.value,
       r: 0,
+      m: menu
     });
 
   }

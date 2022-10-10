@@ -226,6 +226,7 @@ getOrderDetails: (req, res)=>{
   console.log(orderId)
   Order.findById(orderId, (err, docs)=>{
     if(docs){
+      console.log(docs)
       res.render("orderDetails",{orderDetails: docs })
     } else {
       res.send({message: `The given `+ orderId+ `orderId doesn't exists here..`})
