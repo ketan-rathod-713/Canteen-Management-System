@@ -18,6 +18,9 @@ const client = require("../controllers/client");
 const { isAuth } = require("../middlewares/authMiddleware");
 const { getHistory } = require("../controllers/client");
 
+const uploadController = require("../controllers/upload");
+
+
 // ROUTER TO EXPORT
 const router = express.Router();
 
@@ -41,5 +44,13 @@ router
 .use("/items", isAuth ,itemRoutes)
 .use("/checkout", isAuth ,checkoutRoutes)
 .use("/admin", adminRoutes)
+
+
+.post("/upload",isAuth, uploadController.uploadFiles)
+.get("/images", isAuth, uploadController.getListFiles)
+.get("/images/api",uploadController.getIndex)// to get the api
+.get("/images/:name", isAuth, uploadController.download)// can i use this image on home page may be
+.get("/images/:name/delete", isAuth, uploadController.deleteImage)
+.get("/trial",uploadController.downloadAll)
 
 module.exports = router
