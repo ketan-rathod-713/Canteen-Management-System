@@ -1,3 +1,6 @@
+body{
+    background-color: #0F172B;
+}
 .mainBox1{
     margin-top: 30px;
     border-radius: 20px;
@@ -27,13 +30,18 @@
 
 .mainBox2{
     padding: 10px;
-    background-color: #C8B6E2;
+    background-color: #0F172B;
     border-radius: 10px;
     color: black;
 }
-
+.container{
+    color: white;
+}
+.custom-select{
+    color: black;
+  }
 .bg-prim{
-    background-color: #5F6F94;
+    background-color: #0F172B;
 }
 
 .circular{

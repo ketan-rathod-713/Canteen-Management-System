@@ -31,7 +31,7 @@ body{
   left: 0;
   top: 0;
   height: 100%;
-  background: var(--blue);
+  background: #FEA116;
 }
 
 
@@ -111,7 +111,10 @@ body{
   min-height: 100vh;
   background: var(--color-white-hover);
   transition: 0.5%;
-
+  background-color: #0F172B;
+}
+custom-select{
+  color: black;
 }
 
 .topbar{
@@ -186,7 +189,7 @@ body{
 
 .cardbox{
   position: relative;
-
+  background-color: #0F172B;
   width: 100%;
   padding: 20px;
   display: grid;
