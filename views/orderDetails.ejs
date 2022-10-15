@@ -7,6 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/tailwindoutput.css">
     <title>Order Details</title>
+    <style>
+        body {
+            background-color: #0F172B;
+            color: white;
+        }
+    </style>
 </head>
 <body>
     <div class="mainBox">
@@ -18,8 +24,8 @@
             </div>
 
         <div class="overflow-x-auto relative">
-            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 bgo-gradient-to-r from-blue-500 to-purple-500">
-                <thead class="text-xs text-gray-700 uppercase bgo-gray-100 dark:bgo-gray-700 dark:text-gray-400">
+            <table class="w-full text-sm text-left text-gra-500 dark:text-gra-400 bgo-gradient-to-r from-blue-500 to-purple-500">
+                <thead class="text-xs text-gra-700 uppercase bgo-gray-100 dark:bgo-gray-700 dark:text-gra-400">
                     <tr>
                         <th scope="col" class="py-3 px-6">
                             ORDER ID
@@ -31,34 +37,34 @@
                 </thead>
                 <tbody>
                     <tr class="bgo-white dark:bgo-gray-800">
-                        <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-blue-900">
+                        <th scope="row" class="py-4 px-6 font-medium text-gra-900 whitespace-nowrap dark:text-blue-900">
                             ORDER STATUS
                         </th>
-                        <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-blue-900">
+                        <th scope="row" class="py-4 px-6 font-medium text-gra-900 whitespace-nowrap dark:text-blue-900">
                           <%= orderDetails.orderStatus%>
                         </th>
                     </tr>
                     <tr class="bgo-white dark:bgo-gray-800">
-                        <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-blue-900">
+                        <th scope="row" class="py-4 px-6 font-medium text-gra-900 whitespace-nowrap dark:text-blue-900">
                             PAYMENT STATUS
                         </th>
-                        <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-blue-900">
+                        <th scope="row" class="py-4 px-6 font-medium text-gra-900 whitespace-nowrap dark:text-blue-900">
                           <%= orderDetails.paymentStatus%>
                         </th>
                     </tr>
                     <tr class="bgo-white dark:bgo-gray-800">
-                        <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-blue-900">
+                        <th scope="row" class="py-4 px-6 font-medium text-gra-900 whitespace-nowrap dark:text-blue-900">
                             TIME WHEN ORDER PLACED
                         </th>
-                        <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-blue-900">
+                        <th scope="row" class="py-4 px-6 font-medium text-gra-900 whitespace-nowrap dark:text-blue-900">
                           <%= orderDetails.timeWhenOrderPlaced%>
                         </th>
                     </tr>
                     <tr class="bgo-white dark:bgo-gray-800">
-                        <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-blue-900">
+                        <th scope="row" class="py-4 px-6 font-medium text-gra-900 whitespace-nowrap dark:text-blue-900">
                             USER EMAIL
                         </th>
-                        <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-blue-900">
+                        <th scope="row" class="py-4 px-6 font-medium text-gra-900 whitespace-nowrap dark:text-blue-900">
                           <%= orderDetails.userEmail%>
                         </th>
                     </tr>
@@ -67,8 +73,8 @@
         </div>
         
 <div class="overflow-x-auto relative">
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bgo-gray-100 dark:bgo-gray-700 dark:text-gray-400">
+    <table class="w-full text-sm text-left text-gra-500 dark:text-gra-400">
+        <thead class="text-xs text-gra-700 uppercase bgo-gray-100 dark:bgo-gray-700 dark:text-gra-400">
             <tr>
                 <th scope="col" class="py-3 px-6 ">
                     Product Name
@@ -90,10 +96,10 @@
         <tbody>
           <% for(let i=0; i< orderDetails.allItems.length; i++){ %> 
             <tr class="bgo-white dark:bgo-gray-800">
-                <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-blue-900">
+                <th scope="row" class="py-4 px-6 font-medium text-gra-900 whitespace-nowrap dark:text-blue-900">
                   <%= orderDetails.allItems[i].t %>
                 </th>
-                <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-blue-900">
+                <th scope="row" class="py-4 px-6 font-medium text-gra-900 whitespace-nowrap dark:text-blue-900">
                   <%= orderDetails.allItems[i].m %>
                 </th>
                 <td class="py-4 px-6 text-left">

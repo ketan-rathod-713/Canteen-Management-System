@@ -35,7 +35,7 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto py-0 pe-4">
             <a href="/" class="nav-item nav-link active">Home</a>
-            <a href="/about" class="nav-item nav-link">About</a>
+            <!-- <a href="/about" class="nav-item nav-link">About</a> -->
             <a href="/profile" class="nav-item nav-link">Profile</a>
             <a href="/client" class="nav-item nav-link">Your Orders</a>
          </div>
@@ -60,10 +60,19 @@
             Quantity
           </div>
           <div class="col-sm">
+            Time
+          </div>
+          <div class="col-sm">
+            Amount
+          </div>
+          <div class="col-sm">
             Order Status
           </div>
           <div class="col-sm">
             Payment Status
+          </div>
+          <div class="col-sm">
+            Action
           </div>
           </div>
           <hr>
@@ -86,10 +95,19 @@
             </p>
         </div>
           <div class="col-sm">
+            <p><%= data[i].timeWhenOrderPlaced %></p>
+          </div>
+          <div class="col-sm">
+            <p><%= data[i].totalAmount %></p>
+          </div>
+          <div class="col-sm">
             <p><%= data[i].orderStatus %></p>
           </div>
           <div class="col-sm">
             <p><%= data[i].paymentStatus %></p>
+          </div>
+          <div class="col-sm">
+            <a href="checkout/order/<%= data[i]._id %>">View</a>
           </div>
         </div>
         <% } %>
