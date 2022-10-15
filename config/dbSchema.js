@@ -39,6 +39,11 @@ const UserSchema = new mongoose.Schema({
   phone: String,
 });
 
+const reviewSchema = new mongoose.Schema({
+  _id: String,
+  review: String
+})
+
 const User = new mongoose.model('User', UserSchema);
 
 // ____________________________________________________________________________________________________________________________________

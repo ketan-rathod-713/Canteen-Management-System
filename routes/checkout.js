@@ -11,4 +11,7 @@ router
 .post("/",[parseUrl, parseJson], checkoutControllers.payNow)
 .post("/order/:orderId", checkoutControllers.paymentCallback)
 .get("/order/:orderId", checkoutControllers.getOrderDetails)
+.get("/trial/:ORDERID/reviews", (req, res)=>{
+    res.send(req.params)
+})
 module.exports = router;
