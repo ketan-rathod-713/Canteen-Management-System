@@ -3,14 +3,26 @@
     padding: 0;
     margin: 0;
 }
+.color{
+    background-color: #0F172B;
+    min-height: 100vh;
+}
+
 .header{
-    background-color: rgb(75, 41, 41);
+    background-color: #0F172B ;
+    padding-top: 90px;
 }
 
 .header h1{
-    text-align: center;
+    /* text-align: center;  */
+    color: white;
+    margin-left: 67px;
+    margin-bottom: 10px;
+}
+.container{
     color: white;
 }
+
 .col-sm{
-    background-color: #A1A1A1;
+    background-color: #0F172B;
 }

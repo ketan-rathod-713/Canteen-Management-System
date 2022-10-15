@@ -5,7 +5,7 @@ const Usr = dbSchema.Order;
 module.exports={
 
 getHistory: (req, res)=>{
-    console.log(req.user._id)
+    console.log(req.user._id);
 
     const user = req.user._id
 

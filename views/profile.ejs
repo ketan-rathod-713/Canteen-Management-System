@@ -3,25 +3,52 @@
     <head>
         <!-- HEADER PART FOR EVERY PAGE -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
-   
-   
-   
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    
      <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        <title>Update profile | My Canteen</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&family=Pacifico&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="icon" href="logoForMeal.png">
-        <link rel="stylesheet" href="profile.css">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/profile.css">
+        <link href="css/style.css" rel="stylesheet">
+        <title>Update profile | My Canteen</title>
     </head>
 <body class="d-flex flex-column h-100">
+    <nav class="navbar top navbar-expand-lg navbar-dark bg-dark px-4 px-lg-5 py-3 py-lg-0">
+        <a href="" class="navbar-brand p-0">
+            <h1 class="text-primary m-0"><i class="fa fa-utensils me-3"></i>BHOJANALAYA</h1>
+            <!-- <img src="images/logo.png" alt="Logo"> -->
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="fa fa-bars"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto py-0 pe-4">
+                <a href="/" class="nav-item nav-link active">Home</a>
+                <a href="/about" class="nav-item nav-link">About</a>
+                <a href="/profile" class="nav-item nav-link">Profile</a>
+                <a href="/client" class="nav-item nav-link">Your Orders</a>
+             </div>
+                <a href="/contact" class="nav-item nav-link">Contact</a>
+            </div>
+            <a href="/items" class="btn btn-primary py-2 px-4">Order Now</a>
+          </div>
+        </div>
+          </nav>
     <div class="container form-signin mt-5 localbyme">
         
         <form method="POST" action="/profile/<%=user._id%>" class="form-floating">
-            <h2 class="mt-4 mb-3 fw-normal text-bold text-center"><i class="bi bi-pencil-square me-2"></i>My Profile</h2>
+            <h2 class="mt-4 mb-3 fw-normal text-bold text-center"><i class="far fa-user-circle"></i>  My Profile</h2>
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="firstname" placeholder="First Name" name="firstname" value="<%=user.firstname%>" required="">
                 <label for="firstname">First Name</label>
@@ -37,14 +64,17 @@
             <div class="form-floating mb-3">
                 <input type="phone" class="form-control" id="phone" placeholder="Phone" name="phone" value="<%=user.phone%>" required="">
                 <label for="phone">Phone No.</label>
-            </div>
-        
-            
-            <button class="w-100 btn btn-success mb-3" name="upd_confirm" type="submit">Update Profile</button>
+            </div> 
+            <div class="profile-btn">
+            <button class="w-100 profile-btn btn btn-success mb-3" name="upd_confirm" type="submit">Update Profile</button>
+        </div>
         </form>
         <form action="/logout" method="get">
-            <button class="w-100 btn btn-success mb-3" name="upd_confirm" type="submit">Log Out</button>
+            <div class="form-floating">
+            <button class="w-100 btn btn-danger mb-3" name="upd_confirm" type="submit">Log Out</button>
+        </div>
         </form>
+        <p>Note: Tap on the field to change it</p>
     </div>
 </body>
 </html>

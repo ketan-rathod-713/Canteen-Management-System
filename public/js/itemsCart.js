@@ -139,8 +139,8 @@ function removeDish(element){
   let removeCount = 0;
   arr.forEach((ele) => {
     let billElem = document.createElement("div");
-    billElem.innerHTML = `<h4>${ele.t}</h4>
-  <div>
+    billElem.innerHTML = `<h4 style="color:white;">${ele.t}</h4>
+  <div style="color:white;display:flex;align-items:center;">
       <div>Price :  ${ele.p}</div>
       <div>Quantity : ${ele.q}</div>
       <button class="page-link btn" onclick="removeDish(${removeCount})"> 🗑️</button>
