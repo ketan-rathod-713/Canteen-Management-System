@@ -6,6 +6,7 @@ const passport = require('passport');
 const parseUrl = express.urlencoded({ extended: false });
 const parseJson = express.json({ extended: false });
 
+const uploadController = require("../controllers/upload");
 // ROUTES
 const itemRoutes = require("./item")
 const checkoutRoutes = require("./checkout")
@@ -17,9 +18,6 @@ const home = require("../controllers/home");
 const client = require("../controllers/client");
 const { isAuth } = require("../middlewares/authMiddleware");
 const { getHistory } = require("../controllers/client");
-
-const uploadController = require("../controllers/upload");
-
 
 // ROUTER TO EXPORT
 const router = express.Router();
