@@ -88,7 +88,15 @@ module.exports = {
         )
         
         res.redirect("/admin/orders")
-        }
+        },
+
+    getDataForKitchen : (req, res)=>{
+     
+  res.send("sdjkfdfbdsdfvssdf")
+
+        // res.send("hi")
+        
+    }
 
 
 }

@@ -12,6 +12,7 @@ router
 // .post("/items/:date", adminControllers.getAdminItemsOnDate), there is already function for that put that in here or use it from there 
 .get("/",adminControllers.getAdminPanel)
 .get("/orders", adminControllers.getOrdersAll)
+.get("/kitchen", adminControllers.getDataForKitchen)
 .post("/orders/:orderid/accept", adminControllers.postUpdateOrders)
 
 module.exports = router;
