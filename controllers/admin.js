@@ -67,7 +67,7 @@ module.exports = {
     getOrdersAll: (req, res)=>{
 
         Order.find((err, docs)=>{
-            res.render("adminOrders")
+            res.render("datatables",{data: docs})
         })
 
         // res.render("adminOrders")
