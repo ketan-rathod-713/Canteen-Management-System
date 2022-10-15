@@ -68,6 +68,9 @@
           <div class="col-sm">
             Payment Status
           </div>
+          <div class="col-sm">
+            Action
+          </div>
           </div>
           <hr>
      <% for(i=data.length-1; i>=0; i--){ %>
@@ -96,6 +99,12 @@
           </div>
           <div class="col-sm">
             <p><%= data[i].paymentStatus %></p>
+          </div>
+          <div class="col-sm">
+            <form action="/admin/orders/<%= data[i]._id %>/accept" method="post">
+              <button type="submit">Accept</button>
+            </form>
+            <a href="">Cancel</a>
           </div>
         </div>
         <% } %>

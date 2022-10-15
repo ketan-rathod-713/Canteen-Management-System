@@ -66,10 +66,29 @@ module.exports = {
 
     getOrdersAll: (req, res)=>{
 
-        Order.find((err, docs)=>{
+        Order.find({paymentStatus: "TXN_SUCCESS", orderStatus: "Ongoing"},(err, docs)=>{
             res.render("datatables",{data: docs})
         })
 
         // res.render("adminOrders")
-    }
+    },
+
+    postUpdateOrders: (req, res)=>{
+        // what i will get : orderid, func, 
+        const orderId = req.params.orderid
+       
+        const date = "2022-10-15"
+   
+        console.log(orderId)
+        Order.findByIdAndUpdate(
+             orderId,
+          {   $set: {orderStatus: "Delivered"}  },function(err, docs){
+              console.log(docs); 
+            }
+        )
+        
+        res.redirect("/admin/orders")
+        }
+
+
 }
