@@ -19,6 +19,8 @@ var storage = new GridFsStorage({
     file: (req, file)=>{ // got file and req from client so upload it 
         const match  =["image/png", "image/jpeg"]
         
+        console.log(file)
+
         if (match.indexOf(file.mimetype) === -1) { // match from last
             const filename = `${Date.now()}-myFile-${file.originalname}`;
             return filename;
