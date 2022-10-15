@@ -14,7 +14,7 @@
 
     <body class="d-flex flex-column h-100">
         
-        <div class="container bg-primary text-white p-4 mainBox1">
+        <div class="container text-white p-4 mainBox1">
             <h2 class="mt-4">Modify Inventary On Specific Date</h2>
             <form action="/admin/items/date" method="post">
                 <input class="btn btn- mt-2 mb-4" type="date" id="date" name="date">
@@ -107,7 +107,7 @@
 
                 <div id="divnewItem" class="collapse show circular bg-prim mainBox3" aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="container bg-prim circular text-white p-4 mt-4">
-                        <h2 class="text-center">Add New Item To Inventary On <%= date %></h2>
+                        <h2 class="text-center">Add New Item To Inventary on <%= date %></h2>
                     </div>
                     <div class="card-body">
                        
@@ -127,13 +127,13 @@
                                 </label>
                             </div>
                             <select class="custom-select" id="inputGroupSelect01">
-                                <option selected>true
+                                <option>true
                                 </option>
                                 <option class="bg-red" value="">false</option>
                             </select>
                         </div>
 
-                        <div class="container">
+                        <div class="container menu">
                             <h2 class="text-white">Menu</h2>
                             <ul class="list-group" id="menunewItem">
                                
