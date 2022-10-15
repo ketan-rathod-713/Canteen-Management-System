@@ -23,8 +23,6 @@ const uploadController = require("../controllers/upload");
 
 // ROUTER TO EXPORT
 const router = express.Router();
-
-
 // ROUTES
 router
 .get("/",homeControllers.homePageGetReq)
@@ -53,4 +51,11 @@ router
 .get("/images/:name/delete", isAuth, uploadController.deleteImage)
 .get("/trial",uploadController.downloadAll)
 
+
+.post("/upload",isAuth, uploadController.uploadFiles)
+.get("/images", isAuth, uploadController.getListFiles)
+.get("/images/api",uploadController.getIndex)// to get the api
+.get("/images/:name", isAuth, uploadController.download)// can i use this image on home page may be
+.get("/images/:name/delete", isAuth, uploadController.deleteImage)
+.get("/trial",uploadController.downloadAll)
 module.exports = router
