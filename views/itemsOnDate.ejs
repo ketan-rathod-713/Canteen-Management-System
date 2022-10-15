@@ -86,6 +86,15 @@
                                         <% }) %>
                                     </ul>
 
+                                    <form method="post" action="/upload" enctype="multipart/form-data" class="m-5 p-5" style="border:2px solid navy;background-color:rgb(191, 191, 191)">
+                                        <div class="mb-3">
+                                          <input type="file" class="form-control" name="file">
+                                          <input type="text" value="text" name="text">
+                                        </div>
+                                       
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                      </form>
+                                      
                                     <div class="d-flex justify-content-between">
                                         <button class="btn btn-prim1 m-2" id="btn<%= element.itemId %>" onclick="onClickaddbtn(this.id)">Add New Item</button>
                                         <button class="btn btn-prim1 m-2" id="update<%=element.itemId%>" onclick="onClickUpdateMenu(this.id)">Update Menu On DB</button>
