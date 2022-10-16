@@ -14,5 +14,6 @@ router
 .get("/orders", adminControllers.getOrdersAll)
 .get("/kitchen", adminControllers.getDataForKitchen)
 .post("/orders/:orderid/accept", adminControllers.postUpdateOrders)
+.post("/orders/:orderid/notification", adminControllers.sendOrderNotification)
 
 module.exports = router;

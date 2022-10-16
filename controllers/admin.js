@@ -2,6 +2,7 @@ const express = require("express")
 const dbSchema = require('../config/dbSchema')
 const Item = dbSchema.Item;
 const Order = dbSchema.Order;
+const nodemailer= require("nodemailer");
 
 module.exports = {
     getItemsOnDate : (req, res)=>{
@@ -90,13 +91,60 @@ module.exports = {
         res.redirect("/admin/orders")
         },
 
-    getDataForKitchen : (req, res)=>{
+        getDataForKitchen :async (req, res)=>{
      
-  res.send("sdjkfdfbdsdfvssdf")
+            const obj = {};
+    
+    
+            Order.find({paymentStatus: "TXN_SUCCESS", orderStatus: "Ongoing"},(err, docs)=>{
+    
+                for(let i=0; i<docs.length; i++){
+                    for(let j=0; j<docs[i].allItems.length; j++){
+                        if(obj.hasOwnProperty(docs[i].allItems[j].id))
+                        obj[docs[i].allItems[j].id] =  obj[docs[i].allItems[j].id] + 1;
+                        else
+                        obj[docs[i].allItems[j].id] = 1;
+                    }
+                }
+                res.send(obj)
+            })
+            
+        },
 
-        // res.send("hi")
-        
-    }
+        sendOrderNotification: (req, res)=>{
+            const orderId = req.params.orderid
+
+            // orderId = "2022-11-10dc7d271b2392"
+
+            Order.findById(orderId, (err, docs)=>{
+            
+            const transporter = nodemailer.createTransport({
+                service:"hotmail",
+                auth:{
+                    user:"ketanrandom@outlook.com", //admin username
+                    pass:"Random17547@", //admin password
+                }
+            });
+
+            const options = {
+                from:"ketanrandom@outlook.com",
+                to:docs.userEmail,
+                subject:"Order (" +docs._id+") is ready",
+                text:"Hello "+docs.userName +", \nWe hope you are enjoying Diwali !! \n\nYour Order with order id  "+ docs._id+ "is ready on counter. Take it before it is late :|"
+            }
+
+            transporter.sendMail(options, (err,info)=>{
+                if(err){
+                    console.log(err);
+                    return;
+                }
+                console.log("sent: ", info.response);
+            })
+            res.redirect("/admin/orders")
+
+            })
+
+        }
 
 
 }

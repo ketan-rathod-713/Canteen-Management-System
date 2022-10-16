@@ -104,6 +104,10 @@
             <form action="/admin/orders/<%= data[i]._id %>/accept" method="post">
               <button type="submit">Accept</button>
             </form>
+            <form action="/admin/orders/<%= data[i]._id %>/notification" method="post">
+              <button type="submit">Push Notification</button>
+            </form>
+          
             <a href="">Cancel</a>
           </div>
         </div>
