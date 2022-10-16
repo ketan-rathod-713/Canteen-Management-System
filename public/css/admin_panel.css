@@ -114,7 +114,9 @@ body{
   background-color: #0F172B;
 }
 
-
+.divnewItem{
+  width: 40%;
+}
 .topbar{
   width: 100%;
   height: 60px;

@@ -5,6 +5,9 @@ body{
     margin-top: 30px;
     border-radius: 20px;
 }
+.black{
+    color: black;
+}
 
 .mainBox1 h2{
     text-align: center;
@@ -27,7 +30,9 @@ body{
         border-radius: 4px;
         color: white;
 } */
-
+option{
+    color: black;
+}
 .mainBox2{
     padding: 10px;
     background-color: #0F172B;
@@ -37,13 +42,20 @@ body{
 .container{
     color: white;
 }
+
+.menu{
+    color: black;
+}
+
 .custom-select{
     color: black;
   }
 .bg-prim{
     background-color: #0F172B;
 }
-
+label{
+    color: black;
+}
 .circular{
     border-radius: 2px;
 }
