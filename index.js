@@ -24,7 +24,7 @@ require('dotenv').config();
 // AUTHENTICATION STUFF : 
 // MAKE SESSION, SO THAT PASSPORT WORK LATER
 const sessionStore = MongoStore.create({
-  mongoUrl: process.env.DB_STRING
+  mongoUrl: "mongodb+srv://admin-ketan:Ketan@cluster0.odeen.mongodb.net/CanteenItems"
 })
 
 app.use(session({
