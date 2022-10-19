@@ -86,7 +86,7 @@ module.exports = {
           params["ORDER_ID"] = orderDetails._id;  // we have made this ?? how can we use it. it is our custom order id
           params["CUST_ID"] = paymentDetails.customerId;
           params["TXN_AMOUNT"] = paymentDetails.amount; // we are passing this
-          params["CALLBACK_URL"] = `http://localhost:3000/checkout/order/${orderDetails._id}`; // callback to call when payment done or success so need to add entries in database when such event occurs
+          params["CALLBACK_URL"] = `${process.env.URL}/checkout/order/${orderDetails._id}`; // callback to call when payment done or success so need to add entries in database when such event occurs
           params["EMAIL"] = paymentDetails.customerEmail;
           params["MOBILE_NO"] = paymentDetails.customerPhone; 
       
@@ -206,9 +206,11 @@ paymentCallback : (req, res) => {
 
             var _result = JSON.parse(response);
             if (_result.STATUS == "TXN_SUCCESS") {
-              res.send({success: "payment sucess", "S2S response": _result});
+              // res.send({success: "payment sucess", "S2S response": _result});
+              res.redirect(`/checkout/order/${orderDetails._id}`)
             } else {
-              res.send({orderDetails: orderDetails, "S2S Respornse": _result});
+              // res.send({orderDetails: orderDetails, "S2S Respornse": _result});
+              res.redirect(`/checkout/order/${orderDetails._id}`)
             }
           });
         });

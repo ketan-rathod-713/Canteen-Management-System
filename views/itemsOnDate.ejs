@@ -236,7 +236,7 @@ const onClickUpdateMenu = (btnId) => {
   });
   console.log(menuItems);
 
-  fetch("http://localhost:3000/items", {
+  fetch("https://bhojanalyacanteen.herokuapp.com/items", {
     method: "post",
     headers: {
       Accept: "application/json",
@@ -284,7 +284,7 @@ const  onClickAddItem = (btnId)=>{
   });
   console.log(menuItems);
 
-  fetch("http://localhost:3000/items", {
+  fetch("https://bhojanalyacanteen.herokuapp.com/items", {
     method: "post",
     headers: {
       Accept: "application/json",
